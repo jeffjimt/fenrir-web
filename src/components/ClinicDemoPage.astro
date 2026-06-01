@@ -11,117 +11,165 @@ const whatsappUrl = getWhatsappUrl(clinicWhatsappMessage);
 
 const services = [
   {
+    number: "01",
     title: "Consulta general",
-    text: "Atención inicial para orientar consultas frecuentes, revisar necesidades básicas y definir próximos pasos.",
+    text: "Información inicial y orientación sobre los servicios disponibles.",
   },
   {
+    number: "02",
     title: "Control y seguimiento",
-    text: "Espacios para dar continuidad a consultas, revisiones y procesos de atención ya iniciados.",
+    text: "Espacio para revisar indicaciones, horarios o continuidad de atención.",
   },
   {
+    number: "03",
     title: "Orientación al paciente",
-    text: "Información clara sobre horarios, canales disponibles y preparación antes de visitar.",
+    text: "Información clara para preparar la visita y resolver dudas generales.",
   },
   {
+    number: "04",
     title: "Información para visitantes",
-    text: "Datos útiles para quienes necesitan confirmar ubicación, disponibilidad o servicios generales.",
+    text: "Datos útiles sobre ubicación, horarios y canales de contacto.",
   },
 ];
 
-const careItems = [
-  {
-    title: "Horario general",
-    value: "Lunes a viernes",
-    detail: "8:00 a.m. - 5:00 p.m.",
-  },
-  {
-    title: "Disponibilidad",
-    value: "Atención según agenda",
-    detail: "Consulte antes de visitar.",
-  },
-  {
-    title: "WhatsApp",
-    value: "Canal disponible",
-    detail: "Para consultas administrativas.",
-  },
+const careRoute = [
+  "Revise servicios",
+  "Consulte horarios",
+  "Confirme disponibilidad",
+  "Escriba por WhatsApp",
 ];
 
 const patientInfo = [
-  "Tenga a mano su información básica antes de consultar.",
-  "Consulte horarios antes de visitar el centro.",
-  "Confirme disponibilidad por WhatsApp.",
-  "Revise indicaciones generales según el servicio.",
+  "Confirme horarios antes de presentarse",
+  "Tenga a mano su información básica",
+  "Consulte disponibilidad por WhatsApp",
+  "Revise indicaciones generales",
+  "Llegue unos minutos antes de su cita",
 ];
 
-const locationDetails = [
-  "Costa Rica",
-  "Atención presencial según disponibilidad",
-  "Contacto previo recomendado",
+const scheduleBands = [
+  {
+    label: "Lunes a viernes",
+    title: "8:00 a.m. - 5:00 p.m.",
+    text: "Horario general visible para planificar la visita.",
+  },
+  {
+    label: "Sábado",
+    title: "Según disponibilidad",
+    text: "Se recomienda confirmar antes de presentarse.",
+  },
+  {
+    label: "Atención",
+    title: "Cita o consulta previa",
+    text: "Canal disponible para confirmar detalles administrativos.",
+  },
+];
+
+const attentionDetails = [
+  {
+    label: "Ubicación general",
+    text: siteConfig.location,
+  },
+  {
+    label: "Modalidad",
+    text: "Atención con cita o consulta previa",
+  },
+  {
+    label: "Contacto",
+    text: "WhatsApp disponible",
+  },
+  {
+    label: "Recomendación",
+    text: "Confirme disponibilidad antes de visitar",
+  },
+];
+
+const contactChannels = [
+  {
+    label: "WhatsApp",
+    text: "Consulta de servicios y disponibilidad",
+  },
+  {
+    label: "Correo",
+    text: siteConfig.email,
+  },
+  {
+    label: "Ubicación general",
+    text: siteConfig.location,
+  },
+  {
+    label: "Horario de atención",
+    text: "8:00 a.m. - 5:00 p.m.",
+  },
 ];
 ---
 
 <style is:global>
-  @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
+  @import url("https://fonts.googleapis.com/css2?family=Afacad:wght@400;500;600;700&family=Nunito+Sans:wght@400;500;600;700;800&display=swap");
 
   .clinic-demo-page {
-    font-family: "Plus Jakarta Sans", "Manrope", system-ui, sans-serif;
+    font-family: "Nunito Sans", "Manrope", system-ui, sans-serif;
   }
 
+  .clinic-demo-page :where(p, a, button, li, span, small) {
+    font-family: "Nunito Sans", "Manrope", system-ui, sans-serif;
+  }
+
+  .clinic-display,
   .clinic-demo-page h1,
   .clinic-demo-page h2,
   .clinic-demo-page h3 {
-    font-family: "Plus Jakarta Sans", "Manrope", system-ui, sans-serif;
+    font-family: "Afacad", "Nunito Sans", system-ui, sans-serif;
   }
 </style>
 
-<main class="clinic-demo-page relative -mt-[73px] w-full max-w-[100vw] overflow-x-hidden bg-[#f7fbff] pt-[73px] text-[#0f172a]">
+<main class="clinic-demo-page relative -mt-[73px] max-w-[100vw] overflow-x-hidden bg-[#f6f3ea] pt-[73px] text-[#10201f]">
   <div class="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-    <div class="absolute left-[-180px] top-[-140px] h-[460px] w-[460px] rounded-full bg-[#60b1ff]/24 blur-3xl"></div>
-    <div class="absolute right-[-220px] top-[16%] h-[560px] w-[560px] rounded-full bg-[#2563eb]/12 blur-3xl"></div>
-    <div class="absolute bottom-[18%] left-[40%] h-80 w-80 -translate-x-1/2 rounded-full bg-[#14b8a6]/10 blur-3xl"></div>
-    <div class="absolute inset-x-0 top-0 h-[720px] bg-[linear-gradient(rgba(37,99,235,0.042)_1px,transparent_1px),linear-gradient(90deg,rgba(37,99,235,0.035)_1px,transparent_1px)] bg-[size:56px_56px] opacity-45 [mask-image:linear-gradient(to_bottom,black,transparent_78%)]"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_14%_12%,rgba(221,237,228,0.95),transparent_30%),radial-gradient(circle_at_86%_18%,rgba(216,199,163,0.34),transparent_26%),radial-gradient(circle_at_58%_86%,rgba(111,143,122,0.18),transparent_34%),linear-gradient(180deg,#f6f3ea_0%,#efe8dc_100%)]"></div>
+    <div class="absolute left-[-220px] top-[18%] h-[520px] w-[520px] rounded-full bg-[#ddede4]/70 blur-3xl"></div>
+    <div class="absolute bottom-[-260px] right-[-180px] h-[620px] w-[620px] rounded-full bg-[#d8c7a3]/30 blur-3xl"></div>
+    <div class="absolute inset-x-0 top-0 h-[780px] bg-[linear-gradient(rgba(16,32,31,0.035)_1px,transparent_1px)] bg-[size:1px_76px] opacity-60 [mask-image:linear-gradient(to_bottom,black,transparent_82%)]"></div>
   </div>
 
-  <header class="fixed left-0 right-0 top-0 z-50 border-b border-slate-950/[0.08] bg-white/78 backdrop-blur-2xl">
-    <div class="mx-auto flex min-h-[73px] w-full max-w-7xl items-center justify-between gap-3 px-5 lg:px-8">
+  <header class="fixed left-0 right-0 top-0 z-50 border-b border-[#10201f]/10 bg-[#f6f3ea]/82 backdrop-blur-xl">
+    <div class="mx-auto flex min-h-[73px] max-w-7xl items-center justify-between gap-3 px-5 lg:px-8">
       <a
         href="#inicio-clinica"
-        class="group flex min-w-0 items-center gap-3 text-[#0f172a] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb] focus-visible:ring-offset-2"
-        aria-label="Centro Médico Integral"
+        aria-label="Centro de Salud"
+        class="min-w-0 text-[#10201f] transition hover:text-[#0f2d2e] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#6f8f7a] focus-visible:ring-offset-2 focus-visible:ring-offset-[#f6f3ea]"
       >
-        <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl border border-slate-950/[0.08] bg-white shadow-sm shadow-blue-950/[0.05]">
-          <span class="h-4 w-4 rounded-full bg-[#2563eb] shadow-[0_0_0_7px_rgba(96,177,255,0.22)]"></span>
-        </span>
-        <span class="min-w-0">
-          <span class="block text-sm font-extrabold tracking-[-0.02em] sm:text-base">Centro Médico Integral</span>
-          <span class="block text-[0.68rem] font-bold text-[#475569]">Servicios de salud</span>
-        </span>
+        <span class="block text-sm font-extrabold uppercase tracking-[0.08em] sm:text-base">Centro de Salud</span>
+        <span class="mt-1 block text-[0.68rem] font-semibold text-[#10201f]/60">Atención profesional</span>
       </a>
 
-      <nav class="hidden items-center gap-5 text-sm font-bold text-[#475569] lg:flex" aria-label="Navegación de Centro Médico Integral">
-        <a href="#servicios-salud" class="transition hover:text-[#2563eb]">Servicios</a>
-        <a href="#horarios-salud" class="transition hover:text-[#2563eb]">Horarios</a>
-        <a href="#ubicacion-salud" class="transition hover:text-[#2563eb]">Ubicación</a>
-        <a href="#pacientes-salud" class="transition hover:text-[#2563eb]">Pacientes</a>
-        <a href="#contacto-salud" class="transition hover:text-[#2563eb]">Contacto</a>
+      <nav class="hidden items-center gap-7 text-sm font-semibold text-[#10201f]/62 lg:flex" aria-label="Navegación de Centro de Salud">
+        <a href="#servicios-salud" class="transition hover:text-[#0f2d2e]">Servicios</a>
+        <a href="#ruta-salud" class="transition hover:text-[#0f2d2e]">Ruta de atención</a>
+        <a href="#horarios-salud" class="transition hover:text-[#0f2d2e]">Ubicación</a>
+        <a href="#contacto-salud" class="transition hover:text-[#0f2d2e]">Contacto</a>
       </nav>
 
-      <div class="flex min-w-0 shrink-0 items-center gap-2 sm:gap-3">
-        <span class="hidden rounded-full border border-[#2563eb]/15 bg-[#2563eb]/5 px-3 py-1 text-[0.62rem] font-extrabold uppercase tracking-[0.18em] text-[#2563eb] md:inline-flex">
-          Demo conceptual
-        </span>
+      <div class="flex shrink-0 items-center gap-2">
         <a
           href="/#ejemplos"
-          class="inline-flex min-h-10 items-center rounded-full px-3 py-2 text-sm font-bold text-[#475569] transition hover:bg-slate-950/[0.04] hover:text-[#0f172a] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb]"
+          class="hidden rounded-full px-3 py-2 text-sm font-semibold text-[#10201f]/62 transition hover:bg-[#fffdf7]/70 hover:text-[#10201f] sm:inline-flex"
         >
-          <span class="sm:hidden">Volver</span>
-          <span class="hidden sm:inline">Volver a FENRIR</span>
+          Volver a FENRIR
         </a>
+        <a
+          href="/#ejemplos"
+          class="inline-flex rounded-full px-2 py-2 text-xs font-semibold text-[#10201f]/62 transition hover:bg-[#fffdf7]/70 hover:text-[#10201f] sm:hidden"
+        >
+          Volver
+        </a>
+        <span class="hidden rounded-full border border-[#10201f]/10 bg-[#fffdf7]/62 px-3 py-1 text-[0.62rem] font-extrabold uppercase tracking-[0.18em] text-[#6f8f7a] md:inline-flex">
+          Demo conceptual
+        </span>
         <a
           href={whatsappUrl}
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-[#2563eb] text-sm font-extrabold text-white shadow-lg shadow-blue-600/20 transition hover:-translate-y-0.5 hover:bg-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb] focus-visible:ring-offset-2 sm:w-auto sm:px-5"
+          class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-[#0f2d2e] text-sm font-bold text-[#fffdf7] shadow-xl shadow-[#0f2d2e]/15 transition hover:-translate-y-0.5 hover:bg-[#183f40] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#bfa16a] focus-visible:ring-offset-2 focus-visible:ring-offset-[#f6f3ea] sm:w-auto sm:px-5"
           aria-label="Solicitar información por WhatsApp"
         >
           <span class="sm:hidden" aria-hidden="true">→</span>
@@ -131,98 +179,116 @@ const locationDetails = [
     </div>
   </header>
 
-  <section id="inicio-clinica" class="relative px-5 pb-14 pt-12 md:pb-20 md:pt-18 lg:px-8">
-    <div class="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
-      <div class="min-w-0">
-        <p class="inline-flex rounded-full border border-[#2563eb]/15 bg-white/72 px-4 py-2 text-[0.68rem] font-extrabold uppercase tracking-[0.20em] text-[#2563eb] shadow-sm shadow-blue-950/[0.03] backdrop-blur-xl">
-          Atención, horarios y contacto
+  <section id="inicio-clinica" class="relative px-5 pb-16 pt-16 md:pb-24 md:pt-24 lg:px-8">
+    <div class="mx-auto grid min-h-[calc(100vh-120px)] max-w-7xl items-center gap-12 lg:grid-cols-[0.98fr_1.02fr]">
+      <div>
+        <p class="text-xs font-extrabold uppercase tracking-[0.26em] text-[#6f8f7a]">
+          Atención profesional y orientación clara
         </p>
-        <h1 class="mt-6 max-w-4xl text-[clamp(2.65rem,7vw,5.8rem)] font-extrabold leading-[0.98] tracking-[-0.055em] text-[#0f172a]">
-          Atención médica clara, cercana y fácil de consultar
+        <h1 class="clinic-display mt-5 max-w-4xl text-[clamp(3.55rem,8vw,7.7rem)] font-bold leading-[0.9] tracking-[-0.045em] text-[#10201f]">
+          Una atención más clara desde la primera consulta
         </h1>
-        <p class="mt-6 max-w-2xl text-base font-medium leading-[1.75] text-[#475569] sm:text-lg">
-          Consulte servicios, horarios, ubicación y canales de atención en un solo lugar, de forma rápida y sencilla.
+        <p class="mt-6 max-w-2xl text-base font-medium leading-[1.8] text-[#10201f]/68 sm:text-lg">
+          Consulte servicios, horarios y canales de atención en un espacio sencillo, ordenado y fácil de compartir.
         </p>
         <div class="mt-8 flex flex-col gap-3 sm:flex-row">
           <a
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex min-h-12 items-center justify-center rounded-full bg-[#2563eb] px-6 py-3 text-sm font-extrabold text-white shadow-xl shadow-blue-600/20 transition hover:-translate-y-0.5 hover:bg-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb] focus-visible:ring-offset-2"
+            class="inline-flex min-h-12 items-center justify-center rounded-full bg-[#0f2d2e] px-7 py-3 text-sm font-bold text-[#fffdf7] shadow-xl shadow-[#0f2d2e]/15 transition hover:-translate-y-0.5 hover:bg-[#183f40] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#bfa16a] focus-visible:ring-offset-2"
           >
             Solicitar información
           </a>
           <a
             href="#servicios-salud"
-            class="inline-flex min-h-12 items-center justify-center rounded-full border border-slate-950/[0.10] bg-white/72 px-6 py-3 text-sm font-extrabold text-[#0f172a] shadow-sm shadow-slate-950/[0.04] backdrop-blur-xl transition hover:-translate-y-0.5 hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb] focus-visible:ring-offset-2"
+            class="inline-flex min-h-12 items-center justify-center rounded-full border border-[#10201f]/10 bg-[#fffdf7]/70 px-7 py-3 text-sm font-bold text-[#10201f] shadow-sm shadow-[#10201f]/5 transition hover:-translate-y-0.5 hover:bg-[#fffdf7] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#bfa16a] focus-visible:ring-offset-2"
           >
             Ver servicios
           </a>
         </div>
       </div>
 
-      <div class="grid gap-4">
-        <div class="rounded-[2rem] border border-slate-950/[0.08] bg-white/82 p-6 shadow-xl shadow-blue-950/[0.07] backdrop-blur-xl">
-          <div class="flex items-start justify-between gap-4">
-            <div>
-              <p class="text-xs font-extrabold uppercase tracking-[0.20em] text-[#2563eb]">Hoy</p>
-              <h2 class="mt-3 text-2xl font-extrabold leading-tight tracking-[-0.04em] text-[#0f172a]">
-                Información disponible para pacientes y visitantes
-              </h2>
-            </div>
-            <span class="rounded-full bg-[#14b8a6]/10 px-3 py-1 text-xs font-extrabold text-[#0f766e]">Abierto</span>
-          </div>
+      <div class="relative min-h-[560px]">
+        <div class="absolute left-[12%] top-[8%] h-[410px] w-[410px] rounded-[42%_58%_46%_54%] bg-[#ddede4] shadow-2xl shadow-[#6f8f7a]/14"></div>
+        <div class="absolute right-[4%] top-[20%] h-[330px] w-[250px] rounded-full border border-[#10201f]/10 bg-[#d8c7a3]/34"></div>
+        <div class="absolute left-[6%] top-[18%] h-[360px] w-[300px] rounded-[55%_45%_48%_52%] border border-[#fffdf7]/80 bg-[#fffdf7]/58 backdrop-blur-md"></div>
+        <div class="absolute left-[18%] top-[28%] h-44 w-44 rounded-full border border-[#6f8f7a]/22"></div>
+        <div class="absolute left-[30%] top-[39%] h-28 w-28 rounded-full bg-[#6f8f7a]/28 blur-xl"></div>
 
-          <div class="mt-6 grid gap-3 sm:grid-cols-2">
-            <article class="rounded-3xl bg-[#f7fbff] p-5 ring-1 ring-slate-950/[0.08]">
-              <p class="text-xs font-extrabold uppercase tracking-[0.18em] text-[#2563eb]">Horario</p>
-              <p class="mt-4 text-xl font-extrabold text-[#0f172a]">8:00 a.m. - 5:00 p.m.</p>
-              <p class="mt-2 text-sm font-medium leading-6 text-[#475569]">Lunes a viernes</p>
-            </article>
-            <article class="rounded-3xl bg-[#2563eb] p-5 text-white shadow-lg shadow-blue-600/20">
-              <p class="text-xs font-extrabold uppercase tracking-[0.18em] text-white/72">Contacto</p>
-              <p class="mt-4 text-xl font-extrabold leading-tight">WhatsApp disponible</p>
-              <p class="mt-2 text-sm font-medium leading-6 text-white/72">Para confirmar información.</p>
-            </article>
-          </div>
+        <article class="absolute right-0 top-10 w-[68%] max-w-[360px] border-l border-[#10201f]/12 bg-[#fffdf7]/78 p-6 shadow-2xl shadow-[#10201f]/8 backdrop-blur-md">
+          <p class="text-xs font-extrabold uppercase tracking-[0.24em] text-[#6f8f7a]">Horario de atención</p>
+          <p class="clinic-display mt-4 text-4xl font-bold leading-none tracking-[-0.035em] text-[#10201f]">8:00 a.m.</p>
+          <p class="mt-2 text-sm font-semibold text-[#10201f]/58">Lunes a viernes · hasta 5:00 p.m.</p>
+          <div class="mt-6 h-px bg-[#10201f]/10"></div>
+          <p class="mt-5 text-sm font-medium leading-6 text-[#10201f]/68">
+            Información práctica para orientar la visita antes de contactar.
+          </p>
+        </article>
+
+        <div class="absolute bottom-20 left-0 w-[72%] max-w-[380px] bg-[#0f2d2e] px-6 py-5 text-[#fffdf7] shadow-2xl shadow-[#0f2d2e]/18">
+          <p class="text-xs font-extrabold uppercase tracking-[0.24em] text-[#d8c7a3]">Contacto por WhatsApp</p>
+          <p class="mt-3 text-sm font-medium leading-6 text-[#fffdf7]/76">Consultas de servicios, horarios o disponibilidad.</p>
         </div>
 
-        <div class="grid gap-4 sm:grid-cols-2">
-          <article class="rounded-[1.5rem] border border-slate-950/[0.08] bg-white/78 p-5 shadow-sm shadow-blue-950/[0.04] backdrop-blur-xl">
-            <p class="text-xs font-extrabold uppercase tracking-[0.18em] text-[#2563eb]">Ubicación</p>
-            <p class="mt-4 text-lg font-extrabold text-[#0f172a]">{siteConfig.location}</p>
-            <p class="mt-2 text-sm font-medium leading-6 text-[#475569]">Contacto previo recomendado.</p>
-          </article>
-          <article class="rounded-[1.5rem] border border-slate-950/[0.08] bg-white/78 p-5 shadow-sm shadow-blue-950/[0.04] backdrop-blur-xl">
-            <p class="text-xs font-extrabold uppercase tracking-[0.18em] text-[#2563eb]">Servicios</p>
-            <p class="mt-4 text-lg font-extrabold text-[#0f172a]">Consulta y seguimiento</p>
-            <p class="mt-2 text-sm font-medium leading-6 text-[#475569]">Información general para visitantes.</p>
-          </article>
+        <div class="absolute bottom-0 right-[8%] grid h-36 w-36 place-items-center rounded-full border border-[#bfa16a]/42 bg-[#fffdf7]/72 text-center shadow-xl shadow-[#10201f]/8 backdrop-blur-md">
+          <p class="px-4 text-xs font-extrabold uppercase leading-5 tracking-[0.18em] text-[#0f2d2e]">Información clara</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="servicios-salud" class="relative border-y border-slate-950/[0.06] bg-white/72 px-5 py-16 backdrop-blur-xl md:py-20 lg:px-8">
+  <section id="servicios-salud" class="relative border-y border-[#10201f]/10 bg-[#fffdf7]/56 px-5 py-16 md:py-24 lg:px-8">
+    <div class="mx-auto max-w-7xl">
+      <div class="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-start">
+        <div>
+          <p class="text-xs font-extrabold uppercase tracking-[0.24em] text-[#6f8f7a]">Servicios de atención</p>
+          <h2 class="clinic-display mt-3 text-5xl font-bold leading-[0.98] tracking-[-0.04em] text-[#10201f] md:text-6xl">
+            Servicios de atención
+          </h2>
+          <p class="mt-5 max-w-xl text-base font-medium leading-[1.75] text-[#10201f]/68">
+            Información organizada para que cada visitante encuentre lo esencial antes de contactar.
+          </p>
+        </div>
+
+        <div class="divide-y divide-[#10201f]/10 border-y border-[#10201f]/10">
+          {services.map((service) => (
+            <article class="grid gap-4 py-7 md:grid-cols-[0.16fr_0.36fr_0.36fr_0.12fr] md:items-center">
+              <span class="clinic-display text-5xl font-semibold leading-none text-[#6f8f7a]/70">{service.number}</span>
+              <h3 class="clinic-display text-3xl font-bold leading-tight tracking-[-0.03em] text-[#10201f]">{service.title}</h3>
+              <p class="text-sm font-medium leading-[1.75] text-[#10201f]/64 md:text-base">{service.text}</p>
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="w-fit text-xs font-extrabold uppercase tracking-[0.18em] text-[#0f2d2e] underline decoration-[#bfa16a]/50 underline-offset-4 transition hover:text-[#6f8f7a]"
+              >
+                Consultar
+              </a>
+            </article>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="ruta-salud" class="relative bg-[#efe8dc] px-5 py-16 md:py-24 lg:px-8">
     <div class="mx-auto max-w-7xl">
       <div class="max-w-3xl">
-        <p class="text-xs font-extrabold uppercase tracking-[0.22em] text-[#2563eb]">Servicios principales</p>
-        <h2 class="mt-3 text-3xl font-extrabold leading-tight tracking-[-0.045em] text-[#0f172a] md:text-5xl">
-          Atención organizada para consultar con claridad
+        <p class="text-xs font-extrabold uppercase tracking-[0.24em] text-[#6f8f7a]">Ruta de atención</p>
+        <h2 class="clinic-display mt-3 text-5xl font-bold leading-[0.98] tracking-[-0.04em] text-[#10201f] md:text-6xl">
+          Una ruta de consulta sencilla y humana
         </h2>
-        <p class="mt-4 text-base font-medium leading-[1.75] text-[#475569] md:text-lg">
-          Los servicios se presentan de forma simple para que cada persona pueda entender qué opciones están disponibles antes de escribir.
-        </p>
       </div>
 
-      <div class="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-        {services.map((service, index) => (
-          <article class="rounded-[1.75rem] border border-slate-950/[0.08] bg-white p-6 shadow-sm shadow-blue-950/[0.04] transition hover:-translate-y-1 hover:shadow-xl hover:shadow-blue-950/[0.07]">
-            <span class="flex h-10 w-10 items-center justify-center rounded-full bg-[#2563eb]/10 text-sm font-extrabold text-[#2563eb]">
+      <div class="mt-12 divide-y divide-[#10201f]/12 border-y border-[#10201f]/12">
+        {careRoute.map((step, index) => (
+          <article class="grid gap-4 py-8 md:grid-cols-[0.18fr_1fr_auto] md:items-center">
+            <span class="clinic-display text-7xl font-semibold leading-none text-[#10201f]/18">
               {String(index + 1).padStart(2, "0")}
             </span>
-            <h3 class="mt-8 text-xl font-extrabold leading-tight tracking-[-0.035em] text-[#0f172a]">{service.title}</h3>
-            <p class="mt-3 text-sm font-medium leading-[1.75] text-[#475569]">{service.text}</p>
+            <h3 class="clinic-display text-4xl font-bold leading-tight tracking-[-0.035em] text-[#10201f] md:text-5xl">{step}</h3>
+            <span class="hidden h-px w-40 bg-[#10201f]/16 md:block"></span>
           </article>
         ))}
       </div>
@@ -230,50 +296,52 @@ const locationDetails = [
   </section>
 
   <section id="horarios-salud" class="relative px-5 py-16 md:py-24 lg:px-8">
-    <div class="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.78fr_1.22fr] lg:items-start">
-      <div class="lg:sticky lg:top-28">
-        <p class="text-xs font-extrabold uppercase tracking-[0.22em] text-[#2563eb]">Horarios y atención</p>
-        <h2 class="mt-3 text-3xl font-extrabold leading-tight tracking-[-0.045em] text-[#0f172a] md:text-5xl">
-          Consulte antes de visitar
-        </h2>
-        <p class="mt-4 text-base font-medium leading-[1.75] text-[#475569]">
-          La información de atención se mantiene visible para evitar dudas básicas sobre horarios, disponibilidad y canales administrativos.
-        </p>
+    <div class="mx-auto max-w-7xl">
+      <div class="mb-8 flex flex-col justify-between gap-5 md:flex-row md:items-end">
+        <div>
+          <p class="text-xs font-extrabold uppercase tracking-[0.24em] text-[#6f8f7a]">Ubicación y atención</p>
+          <h2 class="clinic-display mt-3 text-5xl font-bold leading-[0.98] tracking-[-0.04em] text-[#10201f] md:text-6xl">
+            Información práctica para planificar la visita
+          </h2>
+        </div>
       </div>
 
-      <div class="grid gap-4 md:grid-cols-3">
-        {careItems.map((item) => (
-          <article class="rounded-[2rem] border border-slate-950/[0.08] bg-white p-6 shadow-sm shadow-blue-950/[0.05]">
-            <p class="text-xs font-extrabold uppercase tracking-[0.20em] text-[#2563eb]">{item.title}</p>
-            <h3 class="mt-5 text-2xl font-extrabold leading-tight tracking-[-0.04em] text-[#0f172a]">{item.value}</h3>
-            <p class="mt-3 text-sm font-medium leading-[1.75] text-[#475569]">{item.detail}</p>
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
+      <div class="grid overflow-hidden border border-[#10201f]/10 bg-[#ddede4] lg:grid-cols-[0.9fr_1.1fr]">
+        <div class="relative min-h-[420px] border-b border-[#10201f]/10 bg-[#eef4eb] p-7 lg:border-b-0 lg:border-r lg:p-9">
+          <div class="absolute inset-0 bg-[linear-gradient(rgba(16,32,31,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(16,32,31,0.04)_1px,transparent_1px)] bg-[size:44px_44px] opacity-70"></div>
+          <div class="absolute left-[12%] top-[18%] h-48 w-48 rounded-full border border-[#6f8f7a]/30"></div>
+          <div class="absolute right-[16%] top-[28%] h-32 w-32 rounded-full bg-[#d8c7a3]/42 blur-xl"></div>
+          <div class="absolute bottom-[18%] left-[30%] h-4 w-4 rounded-full bg-[#0f2d2e] shadow-[0_0_0_12px_rgba(111,143,122,0.18)]"></div>
+          <div class="absolute bottom-[24%] left-[34%] h-px w-[42%] rotate-[-18deg] bg-[#0f2d2e]/18"></div>
+          <div class="relative flex h-full flex-col justify-between">
+            <div>
+              <p class="text-xs font-extrabold uppercase tracking-[0.24em] text-[#6f8f7a]">Mapa abstracto</p>
+              <h3 class="clinic-display mt-4 max-w-sm text-4xl font-bold leading-[0.96] tracking-[-0.04em] text-[#10201f]">
+                Ubicación general en Costa Rica
+              </h3>
+            </div>
+            <p class="max-w-sm text-sm font-semibold leading-7 text-[#10201f]/64">
+              Sin dirección ficticia exacta. La página puede mostrar zona, referencias y canal de confirmación antes de la visita.
+            </p>
+          </div>
+        </div>
 
-  <section id="ubicacion-salud" class="relative border-y border-slate-950/[0.06] bg-white/58 px-5 py-16 backdrop-blur-xl md:py-20 lg:px-8">
-    <div class="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1fr_0.92fr] lg:items-center">
-      <div>
-        <p class="text-xs font-extrabold uppercase tracking-[0.22em] text-[#2563eb]">Ubicación</p>
-        <h2 class="mt-3 text-3xl font-extrabold leading-tight tracking-[-0.045em] text-[#0f172a] md:text-5xl">
-          Información de visita en un bloque claro
-        </h2>
-        <p class="mt-4 max-w-2xl text-base font-medium leading-[1.75] text-[#475569]">
-          Un bloque visual sencillo permite orientar al visitante sin depender de un mapa externo o datos que cambian con frecuencia.
-        </p>
-      </div>
-
-      <div class="overflow-hidden rounded-[2rem] border border-slate-950/[0.08] bg-[#eaf7ff] p-5 shadow-xl shadow-blue-950/[0.06]">
-        <div class="relative min-h-[320px] overflow-hidden rounded-[1.5rem] bg-white">
-          <div class="absolute inset-0 bg-[linear-gradient(90deg,rgba(37,99,235,0.08)_1px,transparent_1px),linear-gradient(rgba(37,99,235,0.08)_1px,transparent_1px)] bg-[size:32px_32px]"></div>
-          <div class="absolute left-[18%] top-[18%] h-28 w-28 rounded-full bg-[#60b1ff]/40 blur-2xl"></div>
-          <div class="absolute bottom-[16%] right-[16%] h-36 w-36 rounded-full bg-[#14b8a6]/20 blur-2xl"></div>
-          <div class="absolute left-1/2 top-1/2 h-16 w-16 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#2563eb] shadow-[0_0_0_12px_rgba(37,99,235,0.12),0_0_0_28px_rgba(96,177,255,0.14)]"></div>
-          <div class="absolute bottom-5 left-5 right-5 grid gap-3 rounded-2xl border border-slate-950/[0.08] bg-white/86 p-4 backdrop-blur-xl sm:grid-cols-3">
-            {locationDetails.map((item) => (
-              <p class="text-sm font-bold leading-6 text-[#475569]">{item}</p>
+        <div class="grid">
+          <div class="grid md:grid-cols-2">
+            {scheduleBands.map((band) => (
+              <article class="border-b border-[#10201f]/10 p-7 md:border-r md:even:border-r-0 lg:p-8">
+                <p class="text-xs font-extrabold uppercase tracking-[0.24em] text-[#6f8f7a]">{band.label}</p>
+                <h3 class="clinic-display mt-7 text-4xl font-bold leading-none tracking-[-0.035em] text-[#10201f]">{band.title}</h3>
+                <p class="mt-4 text-base font-medium leading-7 text-[#10201f]/66">{band.text}</p>
+              </article>
+            ))}
+          </div>
+          <div class="grid gap-0 md:grid-cols-2">
+            {attentionDetails.map((item) => (
+              <article class="border-b border-[#10201f]/10 p-7 last:border-b-0 md:border-r md:even:border-r-0 md:[&:nth-last-child(-n+2)]:border-b-0 lg:p-8">
+                <p class="text-xs font-extrabold uppercase tracking-[0.22em] text-[#bfa16a]">{item.label}</p>
+                <p class="mt-3 text-lg font-bold leading-7 text-[#10201f]/78">{item.text}</p>
+              </article>
             ))}
           </div>
         </div>
@@ -281,79 +349,84 @@ const locationDetails = [
     </div>
   </section>
 
-  <section id="pacientes-salud" class="relative px-5 py-16 md:py-24 lg:px-8">
-    <div class="mx-auto max-w-7xl">
-      <div class="grid gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
-        <div class="lg:sticky lg:top-28">
-          <p class="text-xs font-extrabold uppercase tracking-[0.22em] text-[#2563eb]">Información para pacientes</p>
-          <h2 class="mt-3 text-3xl font-extrabold leading-tight tracking-[-0.045em] text-[#0f172a] md:text-5xl">
-            Antes de solicitar información
-          </h2>
-          <p class="mt-4 text-base font-medium leading-[1.75] text-[#475569]">
-            La información útil se presenta como parte del servicio para que el visitante llegue mejor orientado.
-          </p>
-        </div>
+  <section id="pacientes-salud" class="relative border-y border-[#10201f]/10 bg-[#fffdf7]/50 px-5 py-16 md:py-24 lg:px-8">
+    <div class="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.76fr_1.24fr] lg:items-start">
+      <div>
+        <p class="text-xs font-extrabold uppercase tracking-[0.24em] text-[#6f8f7a]">Información para pacientes</p>
+        <h2 class="clinic-display mt-3 text-5xl font-bold leading-[0.98] tracking-[-0.04em] text-[#10201f] md:text-6xl">
+          Antes de visitar
+        </h2>
+      </div>
 
-        <div class="grid gap-4 sm:grid-cols-2">
-          {patientInfo.map((item, index) => (
-            <article class="rounded-[1.6rem] border border-slate-950/[0.08] bg-white p-6 shadow-sm shadow-blue-950/[0.04]">
-              <span class="flex h-10 w-10 items-center justify-center rounded-full bg-[#14b8a6]/10 text-sm font-extrabold text-[#0f766e]">
+      <div class="divide-y divide-[#10201f]/10 border-y border-[#10201f]/10">
+        {patientInfo.map((item, index) => (
+          <article class="flex items-start gap-5 py-6">
+            <span class="mt-1 h-3 w-3 shrink-0 rounded-full bg-[#6f8f7a] shadow-[0_0_0_8px_rgba(221,237,228,0.92)]"></span>
+            <div class="grid flex-1 gap-2 md:grid-cols-[auto_1fr] md:items-baseline md:gap-6">
+              <span class="text-xs font-extrabold uppercase tracking-[0.22em] text-[#bfa16a]">
                 {String(index + 1).padStart(2, "0")}
               </span>
-              <p class="mt-6 text-base font-bold leading-7 text-[#475569]">{item}</p>
-            </article>
-          ))}
-        </div>
+              <p class="text-lg font-semibold leading-7 text-[#10201f]/76">{item}</p>
+            </div>
+          </article>
+        ))}
       </div>
     </div>
   </section>
 
-  <section id="contacto-salud" class="relative px-5 pb-16 lg:px-8">
-    <div class="mx-auto grid max-w-7xl gap-6 rounded-[2rem] border border-slate-950/[0.08] bg-white p-6 shadow-2xl shadow-blue-950/[0.08] md:p-8 lg:grid-cols-[1fr_0.8fr] lg:items-center">
+  <section id="contacto-salud" class="relative px-5 py-16 md:py-24 lg:px-8">
+    <div class="mx-auto grid max-w-7xl gap-8 bg-[#0f2d2e] p-7 text-[#fffdf7] md:p-10 lg:grid-cols-[1fr_0.72fr] lg:items-center">
       <div>
-        <p class="text-xs font-extrabold uppercase tracking-[0.22em] text-[#2563eb]">Contacto</p>
-        <h2 class="mt-3 text-3xl font-extrabold leading-tight tracking-[-0.045em] text-[#0f172a] md:text-5xl">
+        <p class="text-xs font-extrabold uppercase tracking-[0.24em] text-[#d8c7a3]">Contacto</p>
+        <h2 class="clinic-display mt-3 max-w-3xl text-5xl font-bold leading-[0.96] tracking-[-0.04em] md:text-7xl">
           ¿Necesita más información?
         </h2>
-        <p class="mt-4 max-w-2xl text-base font-medium leading-[1.75] text-[#475569]">
-          Puede consultar horarios, servicios disponibles o detalles de atención por WhatsApp.
+        <p class="mt-5 max-w-2xl text-base font-medium leading-[1.8] text-[#fffdf7]/72">
+          Puede consultar servicios disponibles, horarios o detalles de atención por WhatsApp.
         </p>
       </div>
-      <div class="rounded-[1.5rem] border border-slate-950/[0.08] bg-[#f7fbff] p-5">
-        <div class="grid gap-3">
-          {["Servicios disponibles", "Horario general", "Ubicación y visita"].map((item) => (
-            <div class="rounded-2xl bg-white p-4 text-sm font-bold text-[#475569] ring-1 ring-slate-950/[0.06]">
-              {item}
+      <div class="border-l border-[#fffdf7]/14 pl-0 lg:pl-8">
+        <p class="text-sm font-medium leading-7 text-[#fffdf7]/70">
+          Canal disponible para orientar consultas administrativas y confirmar disponibilidad antes de visitar.
+        </p>
+        <div class="mt-6 grid gap-3">
+          {contactChannels.map((channel) => (
+            <div class="rounded-2xl border border-[#fffdf7]/12 bg-[#fffdf7]/7 p-4">
+              <p class="text-[0.68rem] font-extrabold uppercase tracking-[0.22em] text-[#d8c7a3]">{channel.label}</p>
+              <p class="mt-2 break-words text-sm font-semibold leading-6 text-[#fffdf7]/78">{channel.text}</p>
             </div>
           ))}
-          <a
-            href={whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex min-h-12 items-center justify-center rounded-full bg-[#2563eb] px-7 py-3 text-sm font-extrabold text-white shadow-xl shadow-blue-600/20 transition hover:-translate-y-0.5 hover:bg-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb] focus-visible:ring-offset-2"
-          >
-            Escribir por WhatsApp
-          </a>
         </div>
+        <a
+          href={whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="mt-7 inline-flex min-h-12 items-center justify-center rounded-full bg-[#fffdf7] px-7 py-3 text-sm font-bold text-[#0f2d2e] shadow-xl shadow-black/10 transition hover:-translate-y-0.5 hover:bg-[#ddeee4] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#bfa16a] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0f2d2e]"
+        >
+          Escribir por WhatsApp
+        </a>
       </div>
     </div>
   </section>
 
   <section class="relative px-5 pb-20 lg:px-8">
-    <div class="mx-auto max-w-5xl rounded-[2.25rem] border border-slate-950/[0.08] bg-white p-8 text-center shadow-2xl shadow-blue-950/[0.08] md:p-12">
-      <p class="text-xs font-extrabold uppercase tracking-[0.22em] text-[#2563eb]">Demo conceptual — no corresponde a un cliente real</p>
-      <h2 class="mx-auto mt-4 max-w-3xl text-3xl font-extrabold leading-tight tracking-[-0.045em] text-[#0f172a] md:text-5xl">
+    <div class="mx-auto max-w-5xl border border-[#10201f]/10 bg-[#fffdf7] p-8 text-center shadow-2xl shadow-[#10201f]/6 md:p-12">
+      <p class="text-xs font-extrabold uppercase tracking-[0.24em] text-[#6f8f7a]">FENRIR Soluciones Digitales</p>
+      <h2 class="clinic-display mx-auto mt-4 max-w-3xl text-5xl font-bold leading-[0.98] tracking-[-0.04em] text-[#10201f] md:text-6xl">
         ¿Quiere una página similar para su negocio?
       </h2>
-      <p class="mx-auto mt-5 max-w-2xl text-base font-medium leading-[1.75] text-[#475569]">
+      <p class="mx-auto mt-5 max-w-2xl text-base font-medium leading-[1.8] text-[#10201f]/68">
         Esta es una demo conceptual creada por FENRIR Soluciones Digitales para mostrar cómo podría verse una página adaptada a una clínica, servicio profesional o negocio local.
+      </p>
+      <p class="mt-5 text-xs font-bold uppercase tracking-[0.20em] text-[#10201f]/44">
+        Demo conceptual — no corresponde a un cliente real.
       </p>
       <div class="mt-8">
         <a
           href={whatsappUrl}
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex min-h-12 items-center justify-center rounded-full bg-[#2563eb] px-7 py-3 text-sm font-extrabold text-white shadow-xl shadow-blue-600/20 transition hover:-translate-y-0.5 hover:bg-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb] focus-visible:ring-offset-2"
+          class="inline-flex min-h-12 items-center justify-center rounded-full bg-[#0f2d2e] px-7 py-3 text-sm font-bold text-[#fffdf7] shadow-xl shadow-[#0f2d2e]/15 transition hover:-translate-y-0.5 hover:bg-[#183f40] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#bfa16a] focus-visible:ring-offset-2"
         >
           Solicitar una recomendación
         </a>

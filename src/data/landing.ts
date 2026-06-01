@@ -39,11 +39,11 @@ export const demos = [
     category: "Demo conceptual",
     title: "Clínicas y servicios de salud",
     description:
-      "Una estructura clara para mostrar servicios, horarios, ubicación y facilitar solicitudes de cita.",
+      "Una página clara para mostrar servicios, horarios, ubicación e información de contacto en una experiencia profesional y confiable.",
     highlights: [
       "Servicios organizados",
+      "Horarios y ubicación",
       "Contacto directo",
-      "Información clara para pacientes",
     ],
     href: "/demos/clinicas/",
     tone: "Salud y bienestar",
@@ -54,7 +54,7 @@ export const demos = [
     category: "Demo conceptual",
     title: "Restaurantes y cafeterías",
     description:
-      "Un diseño visual para presentar menú, horarios, ubicación y llamadas rápidas a reservar o escribir por WhatsApp.",
+      "Un diseño visual para presentar menú, horarios, ubicación y facilitar reservas o consultas por WhatsApp.",
     highlights: ["Menú destacado", "Galería visual", "Ubicación y horarios"],
     href: "/demos/restaurantes/",
     tone: "Gastronomía local",

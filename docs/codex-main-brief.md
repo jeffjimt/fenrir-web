@@ -175,7 +175,7 @@ Crear un archivo tipo `src/config/site.ts` con:
 - descriptor: “Soluciones Digitales”
 - whatsappNumber: “506XXXXXXXX”
 - whatsappMessage: “Hola, quiero información sobre una página web para mi negocio.”
-- email: “hola@fenrir.cr” o placeholder editable
+- email: “jeffersonjimenez.srr@gmail.com” o placeholder editable
 - location: “Costa Rica”
 - prices desde
 

@@ -21,7 +21,7 @@ export const siteConfig = {
     footer:
       "Hola, quiero información sobre una página web para mi negocio.",
   },
-  email: "hola@fenrir.cr",
+  email: "jeffersonjimenez.srr@gmail.com",
   location: "Costa Rica",
   navItems: [
     { label: "Inicio", href: "/#inicio" },
