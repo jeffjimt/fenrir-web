@@ -1,0 +1,152 @@
+---
+import ButtonLink from "./ButtonLink.astro";
+
+type DemoVariant = "health" | "restaurant" | "venture";
+
+interface Props {
+  category: string;
+  title: string;
+  description: string;
+  highlights: string[];
+  href: string;
+  variant?: DemoVariant;
+}
+
+const { category, title, description, highlights, href, variant = "health" } = Astro.props;
+
+const themes: Record<
+  DemoVariant,
+  {
+    article: string;
+    badge: string;
+    visual: string;
+    panel: string;
+    accent: string;
+    line: string;
+    button: "secondary" | "dark";
+  }
+> = {
+  health: {
+    article: "border-sky-100 bg-white",
+    badge: "bg-sky-50 text-sky-700 ring-sky-100",
+    visual: "from-sky-50 via-white to-cyan-100",
+    panel: "border-sky-100 bg-white/80",
+    accent: "bg-sky-500",
+    line: "bg-sky-200",
+    button: "secondary",
+  },
+  restaurant: {
+    article: "border-stone-800 bg-[#17110d] text-white",
+    badge: "bg-orange-200/12 text-orange-100 ring-orange-100/15",
+    visual: "from-[#2a1710] via-[#6f2e13] to-[#f4bd73]",
+    panel: "border-white/10 bg-black/25",
+    accent: "bg-orange-300",
+    line: "bg-orange-100/35",
+    button: "dark",
+  },
+  venture: {
+    article: "border-violet-100 bg-white",
+    badge: "bg-violet-50 text-violet-700 ring-violet-100",
+    visual: "from-slate-100 via-violet-100 to-emerald-100",
+    panel: "border-white/80 bg-white/70",
+    accent: "bg-emerald-400",
+    line: "bg-violet-200",
+    button: "secondary",
+  },
+};
+
+const theme = themes[variant];
+const darkCard = variant === "restaurant";
+---
+
+<article
+  class:list={[
+    "flex h-full flex-col overflow-hidden rounded-lg border p-5 shadow-sm shadow-slate-950/5 transition hover:-translate-y-1 hover:shadow-xl",
+    theme.article,
+  ]}
+>
+  <div class:list={["relative min-h-44 overflow-hidden rounded-lg bg-gradient-to-br p-4", theme.visual]}>
+    <div class="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-white/25 blur-2xl" aria-hidden="true"></div>
+    <div class="relative grid h-full gap-3">
+      {
+        variant === "health" && (
+          <>
+            <div class:list={["w-3/4 rounded-lg border p-3 shadow-sm", theme.panel]}>
+              <span class="block h-2 w-20 rounded-full bg-sky-200"></span>
+              <span class="mt-3 block h-2 w-28 rounded-full bg-slate-200"></span>
+            </div>
+            <div class="ml-auto grid w-28 grid-cols-2 gap-2">
+              <span class="h-12 rounded-lg bg-white/80 shadow-sm"></span>
+              <span class="h-12 rounded-lg bg-sky-200/70 shadow-sm"></span>
+              <span class="h-12 rounded-lg bg-cyan-100/80 shadow-sm"></span>
+              <span class="flex h-12 items-center justify-center rounded-lg bg-white/90 text-sky-600 shadow-sm">
+                +
+              </span>
+            </div>
+          </>
+        )
+      }
+      {
+        variant === "restaurant" && (
+          <>
+            <div class="flex items-start justify-between gap-4">
+              <div class:list={["rounded-lg border p-4", theme.panel]}>
+                <span class="block h-2 w-20 rounded-full bg-orange-100/70"></span>
+                <span class="mt-4 block h-12 w-24 rounded-lg bg-orange-200/75"></span>
+              </div>
+              <div class="grid gap-2">
+                <span class="h-12 w-12 rounded-full bg-orange-200/80"></span>
+                <span class="h-12 w-12 rounded-full bg-stone-950/35"></span>
+              </div>
+            </div>
+            <div class="mt-auto grid gap-2">
+              <span class="h-2 rounded-full bg-orange-100/60"></span>
+              <span class="h-2 w-3/4 rounded-full bg-orange-100/35"></span>
+            </div>
+          </>
+        )
+      }
+      {
+        variant === "venture" && (
+          <>
+            <div class="grid grid-cols-[1fr_0.7fr] gap-3">
+              <div class:list={["rounded-lg border p-4 shadow-sm", theme.panel]}>
+                <span class="block h-16 rounded-lg bg-violet-200/70"></span>
+                <span class="mt-3 block h-2 w-24 rounded-full bg-slate-300"></span>
+              </div>
+              <div class="grid gap-3">
+                <span class="rounded-lg bg-emerald-200/80 shadow-sm"></span>
+                <span class="rounded-lg bg-white/80 shadow-sm"></span>
+              </div>
+            </div>
+            <div class="mt-auto flex gap-2">
+              <span class="h-8 flex-1 rounded-full bg-white/80"></span>
+              <span class="h-8 w-12 rounded-full bg-violet-300/75"></span>
+            </div>
+          </>
+        )
+      }
+    </div>
+  </div>
+
+  <p class:list={["mt-6 inline-flex w-max rounded-full px-3 py-1 text-xs font-semibold ring-1", theme.badge]}>
+    {category}
+  </p>
+  <h3 class:list={["mt-3 font-display text-2xl font-semibold", darkCard ? "text-white" : "text-slate-950"]}>
+    {title}
+  </h3>
+  <p class:list={["mt-3 flex-1 text-sm leading-6", darkCard ? "text-stone-300" : "text-slate-600"]}>
+    {description}
+  </p>
+  <ul class:list={["mt-6 grid gap-2 text-sm", darkCard ? "text-stone-200" : "text-slate-700"]}>
+    {
+      highlights.map((item) => (
+        <li class="flex items-center gap-2">
+          <span class:list={["h-1.5 w-1.5 rounded-full", theme.accent]} aria-hidden="true" />
+          <span>{item}</span>
+        </li>
+      ))
+    }
+  </ul>
+  <ButtonLink href={href} label="Ver demo" variant={theme.button} class="mt-6 w-full" />
+</article>

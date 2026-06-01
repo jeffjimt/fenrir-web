@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2400" height="1600" viewBox="0 0 2400 1600" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="base" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0b3df5"/>
+      <stop offset="0.45" stop-color="#071a62"/>
+      <stop offset="1" stop-color="#020617"/>
+    </linearGradient>
+    <linearGradient id="ribbon" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#031337" stop-opacity="0.15"/>
+      <stop offset="0.18" stop-color="#2563eb" stop-opacity="0.72"/>
+      <stop offset="0.48" stop-color="#1d4ed8" stop-opacity="0.9"/>
+      <stop offset="0.78" stop-color="#60a5fa" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#020617" stop-opacity="0.62"/>
+    </linearGradient>
+    <radialGradient id="centerGlow" cx="50%" cy="18%" r="60%">
+      <stop offset="0" stop-color="#3b82f6" stop-opacity="0.55"/>
+      <stop offset="0.42" stop-color="#1d4ed8" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="blur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+    <filter id="softBlur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="80"/>
+    </filter>
+  </defs>
+  <rect width="2400" height="1600" fill="url(#base)"/>
+  <rect width="2400" height="1600" fill="url(#centerGlow)"/>
+  <g filter="url(#blur)" opacity="0.95">
+    <rect x="-40" y="-100" width="118" height="1800" rx="48" fill="url(#ribbon)"/>
+    <rect x="130" y="-100" width="84" height="1800" rx="42" fill="url(#ribbon)"/>
+    <rect x="295" y="-100" width="104" height="1800" rx="48" fill="url(#ribbon)"/>
+    <rect x="465" y="-100" width="72" height="1800" rx="36" fill="url(#ribbon)"/>
+    <rect x="620" y="-100" width="120" height="1800" rx="52" fill="url(#ribbon)"/>
+    <rect x="805" y="-100" width="96" height="1800" rx="42" fill="url(#ribbon)"/>
+    <rect x="970" y="-100" width="78" height="1800" rx="38" fill="url(#ribbon)"/>
+    <rect x="1120" y="-100" width="112" height="1800" rx="50" fill="url(#ribbon)"/>
+    <rect x="1305" y="-100" width="86" height="1800" rx="42" fill="url(#ribbon)"/>
+    <rect x="1460" y="-100" width="124" height="1800" rx="54" fill="url(#ribbon)"/>
+    <rect x="1650" y="-100" width="90" height="1800" rx="42" fill="url(#ribbon)"/>
+    <rect x="1810" y="-100" width="128" height="1800" rx="54" fill="url(#ribbon)"/>
+    <rect x="2020" y="-100" width="104" height="1800" rx="48" fill="url(#ribbon)"/>
+    <rect x="2210" y="-100" width="140" height="1800" rx="60" fill="url(#ribbon)"/>
+  </g>
+  <g opacity="0.22">
+    <path d="M0 0h2400v1600H0z" fill="none" stroke="#93c5fd" stroke-width="1" stroke-opacity="0.12" stroke-dasharray="1 18"/>
+  </g>
+  <rect width="2400" height="1600" fill="url(#centerGlow)" opacity="0.55" filter="url(#softBlur)"/>
+  <rect y="950" width="2400" height="650" fill="#000" opacity="0.48"/>
+  <rect width="260" height="1600" fill="#000" opacity="0.34"/>
+  <rect x="2140" width="260" height="1600" fill="#000" opacity="0.38"/>
+</svg>

@@ -1,0 +1,45 @@
+---
+import ClinicDemoPage from "../../components/ClinicDemoPage.astro";
+import DemoPage from "../../components/DemoPage.astro";
+import RestaurantDemoPage from "../../components/RestaurantDemoPage.astro";
+import VentureDemoPage from "../../components/VentureDemoPage.astro";
+import Footer from "../../components/Footer.astro";
+import Header from "../../components/Header.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { demoPages } from "../../data/landing";
+
+export function getStaticPaths() {
+  return demoPages.map((demo) => ({
+    params: { slug: demo.slug },
+    props: { demo },
+  }));
+}
+
+const { demo } = Astro.props;
+const isClinicDemo = demo.slug === "clinicas";
+const isRestaurantDemo = demo.slug === "restaurantes";
+const isVentureDemo = demo.slug === "emprendimientos";
+const pageDescription = demo.metaDescription ?? demo.description;
+---
+
+<BaseLayout
+  title={demo.seoTitle}
+  description={pageDescription}
+  canonicalPath={`/demos/${demo.slug}/`}
+>
+  {
+    isClinicDemo ? (
+      <ClinicDemoPage demo={demo} />
+    ) : isRestaurantDemo ? (
+      <RestaurantDemoPage demo={demo} />
+    ) : isVentureDemo ? (
+      <VentureDemoPage demo={demo} />
+    ) : (
+      <>
+        <Header />
+        <DemoPage demo={demo} />
+      </>
+    )
+  }
+  <Footer />
+</BaseLayout>

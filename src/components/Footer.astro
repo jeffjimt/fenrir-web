@@ -1,0 +1,71 @@
+---
+import { getWhatsappUrl, siteConfig } from "../config/site";
+
+const whatsappUrl = getWhatsappUrl(siteConfig.whatsappMessages.footer ?? siteConfig.whatsappMessages.header);
+---
+
+<footer class="bg-slate-950 text-white">
+  <div class="mx-auto max-w-7xl px-5 py-12 lg:px-8">
+    <div class="grid gap-10 lg:grid-cols-[1.2fr_0.8fr_0.8fr]">
+      <div class="max-w-md">
+        <img
+          src={siteConfig.assets.footerLogo}
+          alt={siteConfig.fullName}
+          width="190"
+          height="42"
+          class="h-10 w-auto"
+        />
+        <p class="mt-5 text-sm leading-6 text-slate-300">
+          Páginas web profesionales para negocios en Costa Rica, pensadas para
+          mostrar información clara y generar contactos por WhatsApp.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="text-sm font-semibold text-white">Secciones</h2>
+        <nav class="mt-4 grid gap-3" aria-label="Enlaces del footer">
+          {
+            siteConfig.navItems.map((item) => (
+              <a
+                href={item.href}
+                class="text-sm text-slate-300 transition hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
+              >
+                {item.label}
+              </a>
+            ))
+          }
+        </nav>
+      </div>
+
+      <div>
+        <h2 class="text-sm font-semibold text-white">Contacto</h2>
+        <div class="mt-4 grid gap-3 text-sm text-slate-300">
+          <p>{siteConfig.location}</p>
+          <a
+            href={`mailto:${siteConfig.email}`}
+            class="transition hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
+          >
+            {siteConfig.email}
+          </a>
+          <a
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="transition hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
+          >
+            WhatsApp {siteConfig.whatsappNumber}
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="mt-10 flex flex-col gap-3 border-t border-white/10 pt-6 text-sm text-slate-400 md:flex-row md:items-center md:justify-between"
+    >
+      <p>
+        © {new Date().getFullYear()} {siteConfig.fullName}. Todos los derechos reservados.
+      </p>
+      <p>Preparado para publicar y crecer con su negocio.</p>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,17 @@
+---
+import { getWhatsappUrl, siteConfig } from "../config/site";
+
+const whatsappUrl = getWhatsappUrl(siteConfig.whatsappMessages.final);
+---
+
+<div class="fixed inset-x-0 bottom-0 z-40 border-t border-slate-200 bg-white/95 px-4 py-3 shadow-2xl shadow-slate-950/15 backdrop-blur md:hidden">
+  <a
+    href={whatsappUrl}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="flex min-h-12 items-center justify-center rounded-md bg-emerald-500 px-4 py-3 text-sm font-semibold text-white transition hover:bg-emerald-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 focus-visible:ring-offset-2"
+    aria-label="Escribir a FENRIR por WhatsApp"
+  >
+    Escribir por WhatsApp
+  </a>
+</div>

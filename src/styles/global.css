@@ -1,0 +1,119 @@
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Instrument+Serif:ital@0;1&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Instrument Sans", "Poppins", "Inter", system-ui, sans-serif;
+  --font-sans: "Instrument Sans", "Poppins", "Inter", system-ui, sans-serif;
+  --font-serif: "Instrument Serif", Georgia, serif;
+  --color-fenrir-navy: #0b1020;
+  --color-fenrir-slate: #1e293b;
+  --color-fenrir-blue: #2563eb;
+  --color-fenrir-whatsapp: #10b981;
+  --color-fenrir-bg: #f8fafc;
+  --color-fenrir-alt: #f2f4f7;
+}
+
+:root {
+  color-scheme: light;
+  --fenrir-navy: #0b1020;
+  --fenrir-blue: #2563eb;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding-top: 73px;
+  padding-bottom: 76px;
+  background: #050711;
+  font-family: "Instrument Sans", "Poppins", "Inter", system-ui, sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+img,
+svg {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  body {
+    padding-top: 73px;
+    padding-bottom: 0;
+  }
+}
+
+.hero-preheadline {
+  font-family: "Instrument Sans", "Poppins", "Inter", system-ui, sans-serif;
+  font-style: normal;
+  text-wrap: balance;
+}
+
+.hero-ribbons-bg {
+  filter: saturate(1.18) contrast(1.04) brightness(1.12);
+}
+
+.hero-vignette {
+  background:
+    radial-gradient(circle at 50% 20%, rgba(48, 84, 255, 0.14), transparent 32%),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.32) 0%, transparent 18%, transparent 82%, rgba(0, 0, 0, 0.34) 100%),
+    linear-gradient(180deg, rgba(2, 6, 23, 0.02) 0%, rgba(2, 6, 23, 0.12) 50%, rgba(2, 6, 23, 0.58) 100%),
+    radial-gradient(ellipse at center, transparent 48%, rgba(0, 0, 0, 0.28) 100%);
+}
+
+.animate-fade-up {
+  animation: fade-up 760ms ease both;
+}
+
+.animate-hero-title {
+  animation: hero-title 850ms ease 120ms both;
+}
+
+.animate-fade-up-delay {
+  animation: fade-up 760ms ease 220ms both;
+}
+
+.animate-fade-up-late {
+  animation: fade-up 760ms ease 340ms both;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-title {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+::selection {
+  background: rgba(37, 99, 235, 0.18);
+  color: #0b1020;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

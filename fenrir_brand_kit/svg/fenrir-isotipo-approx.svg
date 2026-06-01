@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 240" role="img" aria-label="Fenrir isotipo">
+  <defs>
+    <style>.navy{fill:#0B1020}.blue{fill:#2563EB}</style>
+  </defs>
+  <path class="navy" d="M55 82 L160 22 L160 55 L84 99 L84 179 L55 158 Z"/>
+  <path class="blue" d="M102 101 L168 63 L168 95 L102 133 Z"/>
+  <path class="blue" d="M102 149 L168 111 L168 143 L132 164 L132 209 L102 191 Z"/>
+</svg>

@@ -1,0 +1,305 @@
+---
+import { getWhatsappUrl } from "../config/site";
+
+interface Demo {
+  label: string;
+  message: string;
+}
+
+interface Props {
+  demo: Demo;
+}
+
+const { demo } = Astro.props;
+const whatsappUrl = getWhatsappUrl(demo.message);
+
+const quickCards = [
+  {
+    title: "Menú",
+    text: "Categorías claras para que el visitante entienda rápido qué ofrece el negocio.",
+  },
+  {
+    title: "Horarios",
+    text: "Información visible para decidir cuándo visitar, reservar o escribir.",
+  },
+  {
+    title: "Ubicación",
+    text: "Zona o dirección presentada sin depender de publicaciones antiguas.",
+  },
+  {
+    title: "Reservas o contacto",
+    text: "Botones directos para iniciar una consulta por WhatsApp.",
+  },
+  {
+    title: "Redes sociales",
+    text: "Accesos ordenados para mantener conectados los canales principales.",
+  },
+];
+
+const menuGroups = [
+  {
+    title: "Platos principales",
+    items: ["Especial de la casa", "Opción vegetariana", "Plato para compartir"],
+  },
+  {
+    title: "Bebidas",
+    items: ["Bebida fría", "Café de temporada", "Refresco natural"],
+  },
+  {
+    title: "Postres",
+    items: ["Postre artesanal", "Dulce de temporada", "Porción para compartir"],
+  },
+  {
+    title: "Promociones",
+    items: ["Combo demo", "Especial de semana", "Sugerencia del día"],
+  },
+];
+
+const menuPreview = ["Menú destacado", "Especiales", "Horario", "Reservas por WhatsApp"];
+---
+
+<main class="relative -mt-[73px] overflow-hidden bg-[#120d08] pt-[73px] text-[#fff7ed]">
+  <div class="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_76%_22%,rgba(249,115,22,0.30),transparent_28%),radial-gradient(circle_at_18%_78%,rgba(253,186,116,0.16),transparent_26%),linear-gradient(135deg,#090604_0%,#120d08_42%,#24160d_100%)]"></div>
+    <div class="absolute right-[-180px] top-[12%] h-[620px] w-[620px] rounded-full bg-[#f97316]/20 blur-3xl"></div>
+    <div class="absolute bottom-[-220px] left-[10%] h-[460px] w-[460px] rounded-full bg-[#facc15]/10 blur-3xl"></div>
+    <div class="absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.045)_1px,transparent_1px),linear-gradient(180deg,rgba(255,255,255,0.032)_1px,transparent_1px)] bg-[size:72px_72px] opacity-20"></div>
+  </div>
+
+  <header class="fixed left-0 right-0 top-0 z-50 border-b border-white/10 bg-[#090604]/42 text-[#fff7ed] backdrop-blur-md">
+    <div class="mx-auto flex min-h-[73px] max-w-7xl items-center justify-between gap-4 px-5 lg:px-8">
+      <a
+        href="/"
+        aria-label="Volver a FENRIR"
+        class="text-xs font-semibold uppercase tracking-[0.28em] text-[#fff7ed] transition hover:text-[#fdba74] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f97316] focus-visible:ring-offset-2 focus-visible:ring-offset-[#090604]"
+      >
+        FENRIR
+      </a>
+      <nav class="flex items-center gap-2 sm:gap-3" aria-label="Navegación demo restaurantes">
+        <a
+          href="/#ejemplos"
+          class="hidden rounded-full px-4 py-2 text-sm font-semibold text-[#fff7ed]/70 transition hover:bg-white/5 hover:text-[#fff7ed] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f97316] sm:inline-flex"
+        >
+          Volver a FENRIR
+        </a>
+        <a
+          href={whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-[#fff7ed] text-sm font-semibold text-[#120d08] shadow-2xl shadow-[#f97316]/20 transition hover:-translate-y-0.5 hover:bg-[#fdba74] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f97316] focus-visible:ring-offset-2 focus-visible:ring-offset-[#090604] sm:w-auto sm:px-5"
+          aria-label="Quiero una página similar"
+        >
+          <span class="sm:hidden" aria-hidden="true">→</span>
+          <span class="hidden sm:inline">Quiero una página similar</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="relative min-h-[calc(100vh-73px)] px-5 pb-16 pt-16 sm:pt-20 lg:px-8">
+    <div class="mx-auto grid min-h-[calc(100vh-153px)] max-w-7xl items-center gap-12 lg:grid-cols-[1fr_0.95fr] lg:items-end lg:pb-14">
+      <div class="relative z-10 max-w-3xl self-end">
+        <p class="inline-flex rounded-full border border-white/10 bg-white/[0.06] px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-[#fdba74] shadow-2xl shadow-black/20">
+          Demo conceptual para restaurantes
+        </p>
+        <p class="mt-4 max-w-xl text-sm font-semibold text-[#fff7ed]/58">
+          {demo.label}
+        </p>
+        <h1 class="mt-7 flex flex-col font-display text-[2.65rem] font-semibold leading-[0.98] tracking-normal text-[#fff7ed] sm:text-6xl lg:text-[4.15rem] xl:text-[4.35rem]">
+          <span>Una página visual</span>
+          <span>para restaurantes</span>
+          <span>y cafeterías</span>
+        </h1>
+        <p class="mt-6 max-w-2xl text-base leading-7 text-[#fff7ed]/70 sm:text-lg sm:leading-8">
+          Un diseño pensado para mostrar menú, horarios, ubicación y facilitar
+          reservas o consultas por WhatsApp.
+        </p>
+        <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+          <a
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex min-h-12 items-center justify-center rounded-full bg-[#f97316] px-6 py-3 text-sm font-semibold text-[#fff7ed] shadow-2xl shadow-[#f97316]/25 transition hover:-translate-y-0.5 hover:bg-[#ea580c] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#fdba74] focus-visible:ring-offset-2 focus-visible:ring-offset-[#120d08]"
+          >
+            Quiero una página similar
+          </a>
+          <a
+            href="#menu-demo"
+            class="inline-flex min-h-12 items-center justify-center rounded-full border border-white/10 bg-white/[0.05] px-6 py-3 text-sm font-semibold text-[#fff7ed] transition hover:-translate-y-0.5 hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#fdba74] focus-visible:ring-offset-2 focus-visible:ring-offset-[#120d08]"
+          >
+            Ver menú demo
+          </a>
+        </div>
+      </div>
+
+      <div class="relative z-10 mx-auto w-full max-w-[620px] self-center lg:self-end">
+        <div class="absolute -right-6 top-8 h-36 w-36 rounded-full bg-[#f97316]/24 blur-2xl" aria-hidden="true"></div>
+        <div class="absolute -left-8 bottom-4 h-44 w-44 rounded-full bg-[#facc15]/10 blur-2xl" aria-hidden="true"></div>
+        <div class="relative rounded-[2rem] border border-white/10 bg-[#24160d]/72 p-5 shadow-2xl shadow-black/40 backdrop-blur-md">
+          <div class="rounded-[1.4rem] border border-white/10 bg-[#120d08]/82 p-5">
+            <div class="flex items-center justify-between gap-4 border-b border-white/10 pb-5">
+              <div>
+                <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[#fdba74]">
+                  Menú destacado
+                </p>
+                <p class="mt-2 text-lg font-semibold text-[#fff7ed]">Contenido demo</p>
+              </div>
+              <span class="rounded-full bg-[#f97316]/12 px-3 py-1 text-xs font-semibold text-[#fdba74]">
+                Reservas
+              </span>
+            </div>
+
+            <div class="grid gap-4 py-5 sm:grid-cols-[0.82fr_1.18fr]">
+              <div class="rounded-2xl bg-[#fff7ed] p-5 text-[#120d08]">
+                <p class="text-xs font-semibold uppercase tracking-[0.16em] text-[#ea580c]">
+                  Carta visual
+                </p>
+                <div class="mt-5 grid gap-4">
+                  {menuPreview.map((item) => (
+                    <div class="flex items-center justify-between gap-4 border-b border-[#f97316]/18 pb-3">
+                      <span class="text-sm font-semibold">{item}</span>
+                      <span class="h-2 w-10 rounded-full bg-[#fdba74]"></span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div class="grid gap-4">
+                <div class="min-h-44 rounded-2xl bg-[radial-gradient(circle_at_30%_30%,#fdba74_0%,#f97316_38%,#2f170b_100%)] shadow-2xl shadow-[#f97316]/20"></div>
+                <div class="grid grid-cols-2 gap-4">
+                  <span class="min-h-24 rounded-2xl bg-[#fff7ed]/10"></span>
+                  <span class="min-h-24 rounded-2xl bg-[#fdba74]/18"></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="rounded-2xl border border-[#fdba74]/18 bg-[#f97316]/10 p-4">
+              <div class="flex items-center justify-between gap-4">
+                <div>
+                  <p class="text-sm font-semibold text-[#fff7ed]">Reservas por WhatsApp</p>
+                  <p class="mt-1 text-xs leading-5 text-[#fff7ed]/60">
+                    CTA directo para consultas, reservas o disponibilidad.
+                  </p>
+                </div>
+                <span class="h-10 w-10 rounded-full bg-[#f97316] shadow-lg shadow-[#f97316]/25"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="relative border-y border-white/10 bg-[#090604] px-5 py-16 md:py-20 lg:px-8">
+    <div class="mx-auto max-w-7xl">
+      <div class="max-w-3xl">
+        <p class="text-sm font-semibold text-[#fdba74]">Información rápida</p>
+        <h2 class="mt-3 font-display text-3xl font-semibold text-[#fff7ed] md:text-4xl">
+          Lo que un cliente busca rápido
+        </h2>
+        <p class="mt-4 text-base leading-7 text-[#fff7ed]/65">
+          Una página gastronómica debe guiar hacia el menú, la ubicación y el
+          contacto sin hacer que el visitante busque de más.
+        </p>
+      </div>
+
+      <div class="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-5">
+        {quickCards.map((card, index) => (
+          <article class="rounded-3xl border border-white/10 bg-[#24160d] p-5 shadow-xl shadow-black/20">
+            <span class="flex h-10 w-10 items-center justify-center rounded-full bg-[#f97316]/12 text-sm font-semibold text-[#fdba74]">
+              {String(index + 1).padStart(2, "0")}
+            </span>
+            <h3 class="mt-5 text-lg font-semibold text-[#fff7ed]">{card.title}</h3>
+            <p class="mt-3 text-sm leading-6 text-[#fff7ed]/64">{card.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="menu-demo" class="relative px-5 py-16 md:py-24 lg:px-8">
+    <div class="mx-auto max-w-7xl">
+      <div class="grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
+        <div>
+          <p class="text-sm font-semibold text-[#fdba74]">Menú demo</p>
+          <h2 class="mt-3 font-display text-3xl font-semibold text-[#fff7ed] md:text-4xl">
+            Una carta editorial, visual y fácil de recorrer
+          </h2>
+          <p class="mt-4 text-base leading-7 text-[#fff7ed]/65">
+            Este bloque muestra contenido de ejemplo para un restaurante o
+            cafetería. No corresponde a tarifas ni servicios de FENRIR.
+          </p>
+        </div>
+
+        <div class="grid gap-4 md:grid-cols-2">
+          {menuGroups.map((group) => (
+            <article class="rounded-[1.6rem] border border-white/10 bg-[#24160d] p-6 shadow-2xl shadow-black/24">
+              <h3 class="font-display text-2xl font-semibold text-[#fff7ed]">{group.title}</h3>
+              <div class="mt-6 grid gap-4">
+                {group.items.map((item) => (
+                  <div class="flex items-center justify-between gap-4 border-b border-white/10 pb-3">
+                    <span class="text-sm font-semibold text-[#fff7ed]/88">{item}</span>
+                    <span class="h-2 w-12 rounded-full bg-[#fdba74]/70"></span>
+                  </div>
+                ))}
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="relative px-5 pb-16 lg:px-8">
+    <div class="mx-auto grid max-w-7xl gap-6 rounded-[2rem] border border-white/10 bg-[#24160d] p-6 shadow-2xl shadow-black/30 md:p-8 lg:grid-cols-[1fr_0.9fr]">
+      <div>
+        <p class="text-sm font-semibold text-[#fdba74]">Ubicación y contacto</p>
+        <h2 class="mt-3 font-display text-3xl font-semibold text-[#fff7ed]">
+          Información clara para decidir y escribir
+        </h2>
+        <p class="mt-4 max-w-2xl text-base leading-7 text-[#fff7ed]/65">
+          La demo organiza horario, zona y canal de contacto en una sección
+          compacta para facilitar reservas o consultas.
+        </p>
+      </div>
+      <div class="grid gap-3">
+        {["Horario: disponible para publicar", "Zona: ubicación general", "WhatsApp: consulta directa"].map((item) => (
+          <div class="rounded-2xl border border-white/10 bg-[#120d08]/72 p-4 text-sm font-semibold text-[#fff7ed]/86">
+            {item}
+          </div>
+        ))}
+        <a
+          href={whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex min-h-12 items-center justify-center rounded-full bg-[#fff7ed] px-6 py-3 text-sm font-semibold text-[#120d08] transition hover:bg-[#fdba74] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#fdba74] focus-visible:ring-offset-2 focus-visible:ring-offset-[#24160d]"
+        >
+          Quiero una página similar
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="relative px-5 pb-20 lg:px-8">
+    <div class="mx-auto max-w-5xl rounded-[2rem] border border-[#fdba74]/18 bg-[#090604] p-8 text-left shadow-2xl shadow-black/35 md:p-12">
+      <p class="text-sm font-semibold text-[#fdba74]">Demo conceptual</p>
+      <h2 class="mt-3 max-w-3xl font-display text-3xl font-semibold text-[#fff7ed] md:text-4xl">
+        ¿Quiere una página que muestre mejor su menú y facilite el contacto?
+      </h2>
+      <p class="mt-4 max-w-2xl text-base leading-7 text-[#fff7ed]/65">
+        Podemos recomendar una estructura visual para su restaurante, cafetería
+        o negocio gastronómico.
+      </p>
+      <div class="mt-8">
+        <a
+          href={whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex min-h-12 items-center justify-center rounded-full bg-[#f97316] px-7 py-3 text-sm font-semibold text-[#fff7ed] shadow-2xl shadow-[#f97316]/25 transition hover:-translate-y-0.5 hover:bg-[#ea580c] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#fdba74] focus-visible:ring-offset-2 focus-visible:ring-offset-[#090604]"
+        >
+          Solicitar recomendación
+        </a>
+      </div>
+    </div>
+  </section>
+</main>

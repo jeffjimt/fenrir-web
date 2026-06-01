@@ -1,0 +1,20 @@
+---
+const items = [
+  "Enfoque en negocios de Costa Rica",
+  "Información clara para clientes",
+  "WhatsApp como canal principal",
+];
+---
+
+<aside class="border-y border-slate-200 bg-white" aria-label="Puntos de confianza">
+  <div class="mx-auto grid max-w-7xl gap-3 px-5 py-4 text-sm font-medium text-slate-700 md:grid-cols-3 lg:px-8">
+    {
+      items.map((item) => (
+        <div class="flex items-center gap-3">
+          <span class="h-2 w-2 rounded-full bg-blue-600" aria-hidden="true" />
+          <span>{item}</span>
+        </div>
+      ))
+    }
+  </div>
+</aside>
