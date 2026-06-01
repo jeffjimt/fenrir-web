@@ -1,226 +1,400 @@
 ---
-import { getWhatsappUrl } from "../config/site";
-
-interface Demo {
-  label: string;
-  message: string;
-}
+import { getWhatsappUrl, siteConfig } from "../config/site";
 
 interface Props {
-  demo: Demo;
+  demo?: unknown;
 }
 
-const { demo } = Astro.props;
-const whatsappUrl = getWhatsappUrl(demo.message);
+const ventureWhatsappMessage =
+  "Hola, vi la demo para emprendimientos y quiero una recomendación para mi negocio.";
+const whatsappUrl = getWhatsappUrl(ventureWhatsappMessage);
 
-const pipelineNodes = [
+const secondaryProducts = [
   {
-    title: "Oferta",
-    text: "Qué vende o qué servicio ofrece.",
+    title: "Servicio destacado",
+    text: "Una oferta clara para explicar cómo puede ayudar el negocio.",
+    tag: "Disponible",
   },
   {
-    title: "Historia",
-    text: "Por qué existe la marca y qué la hace distinta.",
+    title: "Línea especial",
+    text: "Espacio para colecciones, temporadas o categorías de la marca.",
+    tag: "Nuevo",
   },
   {
-    title: "Contacto",
-    text: "Canales simples para escribir o consultar.",
+    title: "Atención personalizada",
+    text: "Canal directo para dudas, pedidos o recomendaciones.",
+    tag: "Consulta",
   },
 ];
 
-const idealCards = [
+const storyValues = ["Hecho local", "Oferta clara", "Contacto directo"];
+
+const manifestoItems = [
   {
-    title: "Productos o servicios",
-    text: "Una presentación clara para ordenar categorías, líneas o servicios principales.",
+    title: "Atención directa",
+    text: "El visitante puede escribir sin buscar varios enlaces o perfiles.",
   },
   {
-    title: "Historia de marca",
-    text: "Un espacio breve para contar el origen, estilo y propósito del negocio.",
+    title: "Información clara",
+    text: "Productos, servicios e historia se organizan en una ruta fácil de leer.",
   },
   {
-    title: "Beneficios principales",
-    text: "Bloques concretos para explicar por qué la propuesta puede ser útil al visitante.",
+    title: "Productos destacados",
+    text: "La oferta principal se muestra con contexto suficiente para decidir.",
   },
   {
-    title: "Redes y WhatsApp",
-    text: "Accesos directos para conectar la página con los canales donde ya conversa la marca.",
+    title: "Contacto rápido",
+    text: "WhatsApp, redes y ubicación se mantienen visibles al final del recorrido.",
   },
 ];
 
-const structureBlocks = [
-  "Hero de marca",
-  "Catálogo simple",
-  "Sobre el negocio",
-  "Preguntas frecuentes",
-  "Contacto",
+const contactItems = [
+  { label: "WhatsApp", value: "Consultas directas" },
+  { label: "Instagram", value: "@marcalocal" },
+  { label: "Ubicación", value: siteConfig.location },
+  { label: "Disponibilidad", value: "Según agenda" },
 ];
 ---
 
-<main class="relative -mt-[73px] overflow-hidden bg-[#0a0a0f] px-4 pb-16 pt-[89px] text-[#f8fafc] sm:px-6 sm:pb-20 lg:px-8">
-  <div class="pointer-events-none absolute inset-0" aria-hidden="true">
-    <div class="absolute inset-x-0 top-0 h-[520px] bg-[radial-gradient(ellipse_at_top,rgba(48,84,255,0.28),rgba(56,189,248,0.10)_32%,transparent_72%)]"></div>
-    <div class="absolute left-1/2 top-[-360px] h-[560px] w-[1120px] -translate-x-1/2 rounded-[50%] border border-[#3054ff]/25 bg-[#3054ff]/10 shadow-[0_0_120px_rgba(48,84,255,0.32)]"></div>
-    <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.035)_1px,transparent_1px)] bg-[size:48px_48px] opacity-[0.16]"></div>
+<style is:global>
+  @import url("https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap");
+
+  .venture-demo-page {
+    font-family: "IBM Plex Sans", "Manrope", system-ui, sans-serif;
+  }
+
+  .venture-demo-page .venture-display,
+  .venture-demo-page h1,
+  .venture-demo-page h2,
+  .venture-demo-page h3 {
+    font-family: "Archivo", "IBM Plex Sans", system-ui, sans-serif;
+  }
+</style>
+
+<main class="venture-demo-page relative -mt-[73px] overflow-hidden bg-[#080a12] pt-[73px] text-[#f8fafc]">
+  <div class="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+    <div class="absolute inset-x-0 top-0 h-[680px] bg-[radial-gradient(ellipse_at_50%_0%,rgba(34,197,94,0.18),rgba(56,189,248,0.12)_34%,transparent_72%)]"></div>
+    <div class="absolute right-[-220px] top-[12%] h-[560px] w-[560px] rounded-full bg-[#3054ff]/20 blur-3xl"></div>
+    <div class="absolute left-[-220px] top-[38%] h-[520px] w-[520px] rounded-full bg-[#22c55e]/12 blur-3xl"></div>
+    <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.032)_1px,transparent_1px)] bg-[size:52px_52px] opacity-[0.18]"></div>
   </div>
 
-  <div class="relative mx-auto max-w-7xl">
-    <section class="relative overflow-hidden rounded-[2rem] border border-white/[0.08] bg-[#111118] shadow-2xl shadow-black/40">
-      <div class="pointer-events-none absolute inset-0" aria-hidden="true">
-        <div class="absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-[#38bdf8]/60 to-transparent"></div>
-        <div class="absolute left-1/2 top-[-220px] h-[360px] w-[760px] -translate-x-1/2 rounded-[50%] border border-[#3054ff]/30 bg-[radial-gradient(ellipse_at_center,rgba(48,84,255,0.42),rgba(56,189,248,0.12)_42%,transparent_72%)] blur-[0.5px]"></div>
-        <div class="absolute inset-x-0 top-0 h-80 bg-[linear-gradient(rgba(255,255,255,0.045)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.045)_1px,transparent_1px)] bg-[size:44px_44px] opacity-30 [mask-image:linear-gradient(to_bottom,black,transparent)]"></div>
-        <div class="absolute bottom-[-160px] right-[-120px] h-80 w-80 rounded-full bg-[#3054ff]/20 blur-3xl"></div>
-      </div>
+  <header class="fixed left-0 right-0 top-0 z-50 border-b border-white/[0.08] bg-[#080a12]/70 text-[#f8fafc] backdrop-blur-xl">
+    <div class="mx-auto flex min-h-[73px] max-w-7xl items-center justify-between gap-4 px-5 lg:px-8">
+      <a
+        href="#inicio-emprendimiento"
+        aria-label="Marca Local"
+        class="min-w-0 transition hover:text-[#38bdf8] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#38bdf8] focus-visible:ring-offset-2 focus-visible:ring-offset-[#080a12]"
+      >
+        <span class="block venture-display text-base font-black uppercase tracking-[-0.02em] sm:text-lg">Marca Local</span>
+        <span class="mt-1 block text-[0.68rem] font-bold uppercase tracking-[0.16em] text-[#38bdf8]/82">Productos & Servicios</span>
+      </a>
 
-      <header class="relative z-20 flex min-h-20 items-center justify-between gap-4 border-b border-white/[0.08] px-4 sm:px-6 lg:px-8">
+      <nav class="hidden items-center gap-6 text-sm font-bold text-[#f8fafc]/62 lg:flex" aria-label="Navegación de Marca Local">
+        <a class="transition hover:text-[#38bdf8]" href="#productos">Productos</a>
+        <a class="transition hover:text-[#38bdf8]" href="#historia">Historia</a>
+        <a class="transition hover:text-[#38bdf8]" href="#beneficios">Beneficios</a>
+        <a class="transition hover:text-[#38bdf8]" href="#contacto">Contacto</a>
+      </nav>
+
+      <div class="flex items-center gap-2">
+        <span class="hidden rounded-full border border-[#38bdf8]/20 bg-[#38bdf8]/8 px-3 py-1 text-[0.62rem] font-extrabold uppercase tracking-[0.18em] text-[#38bdf8] md:inline-flex">
+          Demo conceptual
+        </span>
         <a
-          href="/"
-          aria-label="Volver a FENRIR"
-          class="text-xs font-bold uppercase tracking-[0.28em] text-[#f8fafc] transition hover:text-[#38bdf8] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#38bdf8] focus-visible:ring-offset-2 focus-visible:ring-offset-[#111118]"
+          href="/#ejemplos"
+          class="inline-flex rounded-full px-3 py-2 text-xs font-bold text-[#f8fafc]/64 transition hover:bg-white/[0.06] hover:text-[#f8fafc] sm:text-sm"
         >
-          FENRIR
+          <span class="sm:hidden">Volver</span>
+          <span class="hidden sm:inline">Volver a FENRIR</span>
         </a>
-        <nav class="hidden items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.03] p-1 text-sm font-medium text-[#f8fafc]/68 md:flex" aria-label="Navegación demo emprendimientos">
-          <a class="rounded-full px-4 py-2 transition hover:bg-white/[0.06] hover:text-[#f8fafc]" href="#estructura">Estructura</a>
-          <a class="rounded-full px-4 py-2 transition hover:bg-white/[0.06] hover:text-[#f8fafc]" href="#ideal-para">Ideal para</a>
-          <a class="rounded-full px-4 py-2 transition hover:bg-white/[0.06] hover:text-[#f8fafc]" href="#contacto">Contacto</a>
-        </nav>
         <a
           href={whatsappUrl}
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex min-h-10 items-center justify-center rounded-full bg-[#f8fafc] px-4 py-2 text-xs font-bold tracking-[0.01em] text-[#0a0a0f] shadow-2xl shadow-[#3054ff]/20 transition hover:-translate-y-0.5 hover:bg-[#dbeafe] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#38bdf8] focus-visible:ring-offset-2 focus-visible:ring-offset-[#111118] sm:px-5 sm:text-sm"
+          class="inline-flex min-h-10 items-center justify-center rounded-full bg-[#f8fafc] px-4 py-2 text-xs font-extrabold text-[#080a12] shadow-2xl shadow-[#38bdf8]/16 transition hover:-translate-y-0.5 hover:bg-[#d9f99d] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#38bdf8] focus-visible:ring-offset-2 focus-visible:ring-offset-[#080a12] sm:px-5 sm:text-sm"
         >
-          Quiero una página similar
+          <span class="sm:hidden">WhatsApp</span>
+          <span class="hidden sm:inline">Escribir por WhatsApp</span>
         </a>
-      </header>
-
-      <div class="relative z-10 px-5 py-16 sm:px-8 sm:py-20 lg:px-12 lg:pb-16 lg:pt-24">
-        <div class="mx-auto max-w-5xl text-center">
-          <p class="inline-flex rounded-full border border-white/[0.08] bg-white/[0.05] px-4 py-2 text-xs font-bold uppercase tracking-[0.22em] text-[#38bdf8] shadow-2xl shadow-[#3054ff]/10">
-            Demo conceptual para emprendimientos
-          </p>
-          <p class="mx-auto mt-5 max-w-xl text-sm font-bold text-[#f8fafc]/58">
-            {demo.label}
-          </p>
-          <h1 class="mx-auto mt-7 flex max-w-5xl flex-col font-display text-[clamp(2.7rem,8vw,6.4rem)] font-bold leading-[0.94] tracking-[-0.04em] text-[#f8fafc]">
-            <span>Una página flexible</span>
-            <span>para presentar su marca</span>
-          </h1>
-          <p class="mx-auto mt-6 max-w-2xl text-base leading-7 text-[#f8fafc]/68 sm:text-lg sm:leading-8">
-            Un diseño pensado para mostrar productos, servicios, historia del negocio
-            y canales de contacto en una experiencia clara.
-          </p>
-          <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-[#3054ff] px-6 py-3 text-sm font-bold text-white shadow-2xl shadow-[#3054ff]/30 transition hover:-translate-y-0.5 hover:bg-[#2444d8] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#38bdf8] focus-visible:ring-offset-2 focus-visible:ring-offset-[#111118] sm:w-auto"
-            >
-              Quiero una página similar
-            </a>
-            <a
-              href="#estructura"
-              class="inline-flex min-h-12 w-full items-center justify-center rounded-full border border-white/[0.08] bg-white/[0.04] px-6 py-3 text-sm font-bold text-[#f8fafc] transition hover:-translate-y-0.5 hover:bg-white/[0.08] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#38bdf8] focus-visible:ring-offset-2 focus-visible:ring-offset-[#111118] sm:w-auto"
-            >
-              Ver estructura
-            </a>
-          </div>
-        </div>
-
-        <div class="mx-auto mt-14 max-w-5xl rounded-[1.75rem] border border-white/[0.08] bg-[#171722]/78 p-4 shadow-2xl shadow-black/30 backdrop-blur-sm sm:p-6 lg:p-7">
-          <div class="relative grid gap-4 md:grid-cols-3">
-            <div class="pointer-events-none absolute left-[16%] right-[16%] top-1/2 hidden h-px bg-gradient-to-r from-[#3054ff]/20 via-[#38bdf8]/60 to-[#3054ff]/20 md:block" aria-hidden="true"></div>
-            {pipelineNodes.map((node, index) => (
-              <article class="relative rounded-[1.35rem] border border-white/[0.08] bg-[#111118] p-5 text-left shadow-xl shadow-black/24">
-                <div class="flex items-center justify-between gap-4">
-                  <span class="flex h-11 w-11 items-center justify-center rounded-full border border-[#38bdf8]/30 bg-[#3054ff]/18 text-sm font-bold text-[#38bdf8] shadow-[0_0_35px_rgba(48,84,255,0.25)]">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <span class="h-2 w-14 rounded-full bg-gradient-to-r from-[#3054ff] to-[#38bdf8]"></span>
-                </div>
-                <h2 class="mt-6 font-display text-xl font-bold leading-tight tracking-[-0.035em] text-[#f8fafc]">{node.title}</h2>
-                <p class="mt-3 text-sm font-medium leading-[1.7] text-[#f8fafc]/64">{node.text}</p>
-              </article>
-            ))}
-          </div>
-        </div>
       </div>
-    </section>
+    </div>
+  </header>
 
-    <section id="ideal-para" class="py-16 md:py-20">
-      <div class="grid gap-8 lg:grid-cols-[0.76fr_1.24fr] lg:items-start">
-        <div class="lg:sticky lg:top-8">
-          <p class="text-sm font-bold text-[#38bdf8]">Ideal para mostrar</p>
-          <h2 class="mt-3 font-display text-3xl font-bold tracking-[-0.04em] text-[#f8fafc] md:text-4xl">
-            Lo esencial de una marca emergente, ordenado en una sola experiencia
-          </h2>
-          <p class="mt-4 max-w-xl text-base leading-7 text-[#f8fafc]/64">
-            La página puede presentar una oferta simple sin parecer genérica ni más grande de lo que el negocio necesita.
-          </p>
-        </div>
-
-        <div class="grid gap-4 sm:grid-cols-2">
-          {idealCards.map((card) => (
-            <article class="rounded-[1.5rem] border border-white/[0.08] bg-[#171722] p-6 shadow-xl shadow-black/20">
-              <span class="mb-6 block h-2 w-16 rounded-full bg-gradient-to-r from-[#3054ff] to-[#38bdf8]"></span>
-              <h3 class="font-display text-xl font-bold leading-tight tracking-[-0.035em] text-[#f8fafc]">{card.title}</h3>
-              <p class="mt-3 text-sm font-medium leading-[1.7] text-[#f8fafc]/64">{card.text}</p>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <section id="estructura" class="rounded-[2rem] border border-white/[0.08] bg-[#111118] p-5 shadow-2xl shadow-black/30 sm:p-8 lg:p-10">
-      <div class="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-        <div>
-          <p class="text-sm font-bold text-[#38bdf8]">Estructura flexible</p>
-          <h2 class="mt-3 font-display text-3xl font-bold tracking-[-0.04em] text-[#f8fafc] md:text-4xl">
-            Bloques que pueden crecer con el negocio
-          </h2>
-          <p class="mt-4 max-w-2xl text-base leading-7 text-[#f8fafc]/64">
-            Esta demo muestra una organización adaptable para presentar lo que la marca ofrece, resolver dudas básicas y llevar al visitante a contacto.
-          </p>
-        </div>
-
-        <div class="rounded-[1.5rem] border border-white/[0.08] bg-[#171722] p-4 sm:p-5">
-          <div class="grid gap-3">
-            {structureBlocks.map((block, index) => (
-              <div class="flex items-center gap-4 rounded-2xl border border-white/[0.08] bg-[#0a0a0f]/80 p-4">
-                <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#3054ff]/18 text-xs font-bold tracking-[0.04em] text-[#38bdf8]">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <span class="text-sm font-bold text-[#f8fafc]">{block}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="contacto" class="pt-16 md:pt-20">
-      <div class="relative overflow-hidden rounded-[2rem] border border-white/[0.08] bg-[#171722] p-6 text-center shadow-2xl shadow-black/30 sm:p-8 lg:p-12">
-        <div class="pointer-events-none absolute inset-x-0 top-0 h-48 bg-[radial-gradient(ellipse_at_top,rgba(48,84,255,0.32),transparent_68%)]" aria-hidden="true"></div>
-        <div class="relative mx-auto max-w-3xl">
-          <p class="text-sm font-bold text-[#38bdf8]">Contacto directo</p>
-          <h2 class="mt-3 font-display text-3xl font-bold tracking-[-0.04em] text-[#f8fafc] md:text-5xl">
-            ¿Quiere una página que presente mejor su emprendimiento?
-          </h2>
-          <p class="mx-auto mt-4 max-w-2xl text-base leading-7 text-[#f8fafc]/64">
-            Podemos recomendar una estructura clara según lo que vende, lo que quiere comunicar y los canales donde atiende.
-          </p>
+  <section id="inicio-emprendimiento" class="relative px-5 pb-16 pt-14 md:pb-24 md:pt-20 lg:px-8">
+    <div class="mx-auto grid max-w-7xl items-center gap-12 lg:min-h-[calc(100vh-153px)] lg:grid-cols-[0.95fr_1.05fr]">
+      <div class="relative z-10 max-w-4xl">
+        <p class="inline-flex rounded-full border border-white/[0.08] bg-white/[0.05] px-4 py-2 text-xs font-extrabold uppercase tracking-[0.22em] text-[#38bdf8] shadow-2xl shadow-[#3054ff]/10">
+          Demo conceptual — no corresponde a un cliente real
+        </p>
+        <h1 class="venture-display mt-7 max-w-5xl text-[clamp(3rem,7.8vw,7rem)] font-black leading-[0.9] tracking-[-0.055em] text-[#f8fafc]">
+          Productos, historia y contacto en una sola página
+        </h1>
+        <p class="mt-6 max-w-2xl text-base font-medium leading-[1.75] text-[#f8fafc]/68 sm:text-lg">
+          Un espacio moderno para presentar lo que ofrece la marca, contar su historia y facilitar consultas por WhatsApp.
+        </p>
+        <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+          <a
+            href="#productos"
+            class="inline-flex min-h-12 items-center justify-center rounded-full bg-[#3054ff] px-6 py-3 text-sm font-extrabold text-white shadow-2xl shadow-[#3054ff]/28 transition hover:-translate-y-0.5 hover:bg-[#2444d8] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#38bdf8] focus-visible:ring-offset-2 focus-visible:ring-offset-[#080a12]"
+          >
+            Ver productos
+          </a>
           <a
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            class="mt-8 inline-flex min-h-12 items-center justify-center rounded-full bg-[#f8fafc] px-7 py-3 text-sm font-bold text-[#0a0a0f] shadow-2xl shadow-[#3054ff]/24 transition hover:-translate-y-0.5 hover:bg-[#dbeafe] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#38bdf8] focus-visible:ring-offset-2 focus-visible:ring-offset-[#171722]"
+            class="inline-flex min-h-12 items-center justify-center rounded-full border border-white/[0.09] bg-white/[0.04] px-6 py-3 text-sm font-extrabold text-[#f8fafc] transition hover:-translate-y-0.5 hover:bg-white/[0.08] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#38bdf8] focus-visible:ring-offset-2 focus-visible:ring-offset-[#080a12]"
           >
-            Solicitar recomendación
+            Contactar
           </a>
         </div>
       </div>
-    </section>
-  </div>
+
+      <div class="relative z-10 min-h-[520px]">
+        <div class="absolute left-1/2 top-1/2 h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#3054ff]/18 blur-3xl"></div>
+        <div class="absolute right-[7%] top-4 h-[390px] w-[250px] rotate-6 rounded-[2.4rem] border border-white/[0.10] bg-[linear-gradient(150deg,#1d2bff_0%,#101522_54%,#080a12_100%)] p-5 shadow-2xl shadow-[#3054ff]/24 sm:right-[18%] sm:h-[450px] sm:w-[300px] lg:right-[10%]">
+          <div class="flex h-full flex-col justify-between overflow-hidden rounded-[1.8rem] border border-white/[0.08] bg-[#f8fafc] p-5 text-[#080a12]">
+            <div class="flex items-center justify-between gap-4">
+              <span class="text-[0.62rem] font-black uppercase tracking-[0.24em] text-[#3054ff]">Marca Local</span>
+              <span class="h-10 w-10 rounded-full bg-[#d9f99d]"></span>
+            </div>
+            <div class="space-y-4">
+              <div class="h-36 rounded-[1.6rem] bg-[radial-gradient(circle_at_34%_28%,rgba(56,189,248,0.92),transparent_22%),radial-gradient(circle_at_64%_62%,rgba(34,197,94,0.78),transparent_28%),linear-gradient(135deg,#3054ff,#0f172a)]"></div>
+              <div>
+                <p class="text-xs font-extrabold uppercase tracking-[0.22em] text-[#3054ff]">Producto destacado</p>
+                <h2 class="venture-display mt-2 text-3xl font-black leading-none tracking-[-0.055em]">Colección principal</h2>
+              </div>
+            </div>
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex min-h-11 items-center justify-center rounded-full bg-[#080a12] px-5 py-3 text-sm font-extrabold text-[#f8fafc] transition hover:bg-[#3054ff]"
+            >
+              Consultar
+            </a>
+          </div>
+        </div>
+
+        <article class="absolute left-0 top-20 max-w-[245px] rounded-[1.5rem] border border-[#38bdf8]/20 bg-[#101522]/88 p-5 shadow-2xl shadow-black/30 backdrop-blur-md sm:left-[4%]">
+          <p class="text-xs font-extrabold uppercase tracking-[0.22em] text-[#38bdf8]">Catálogo mini</p>
+          <div class="mt-5 space-y-4">
+            {["Productos", "Historia", "Contacto"].map((item) => (
+              <div class="flex items-center justify-between gap-4 border-b border-white/[0.08] pb-3 text-sm font-bold text-[#f8fafc]/78 last:border-b-0 last:pb-0">
+                <span>{item}</span>
+                <span class="h-2 w-10 rounded-full bg-[#22c55e]/80"></span>
+              </div>
+            ))}
+          </div>
+        </article>
+
+        <article class="absolute bottom-5 left-[12%] w-[72%] max-w-[360px] rounded-[1.6rem] border border-white/[0.08] bg-[#d9f99d] p-5 text-[#080a12] shadow-2xl shadow-[#22c55e]/12 sm:left-[18%]">
+          <p class="text-xs font-black uppercase tracking-[0.22em] text-[#3054ff]">Etiqueta de marca</p>
+          <p class="mt-3 text-xl font-black leading-tight">Una página para mostrar oferta, personalidad y contacto.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="productos" class="relative border-y border-white/[0.08] bg-[#0b0e18] px-5 py-16 md:py-24 lg:px-8">
+    <div class="mx-auto max-w-7xl">
+      <div class="max-w-3xl">
+        <p class="text-xs font-extrabold uppercase tracking-[0.22em] text-[#38bdf8]">Escaparate</p>
+        <h2 class="venture-display mt-3 text-4xl font-black leading-tight tracking-[-0.045em] text-[#f8fafc] md:text-5xl">
+          Productos y servicios en primer plano
+        </h2>
+        <p class="mt-4 text-base font-medium leading-7 text-[#f8fafc]/64 md:text-lg">
+          Una marca pequeña puede presentar su oferta como un catálogo claro, con un producto principal y opciones secundarias fáciles de consultar.
+        </p>
+      </div>
+
+      <div class="mt-10 grid gap-5 lg:grid-cols-[1.18fr_0.82fr] lg:items-stretch">
+        <article class="relative min-h-[520px] overflow-hidden rounded-[2.4rem] border border-white/[0.08] bg-[#101522] p-6 shadow-2xl shadow-black/30 md:p-8">
+          <div class="absolute right-[-120px] top-[-120px] h-80 w-80 rounded-full bg-[#3054ff]/30 blur-3xl"></div>
+          <div class="absolute bottom-[-120px] left-[-100px] h-72 w-72 rounded-full bg-[#22c55e]/20 blur-3xl"></div>
+          <div class="relative flex h-full flex-col justify-between gap-10">
+            <div class="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+              <div>
+                <p class="text-xs font-extrabold uppercase tracking-[0.22em] text-[#38bdf8]">Destacado</p>
+                <h3 class="venture-display mt-3 max-w-lg text-5xl font-black leading-[0.92] tracking-[-0.055em] text-[#f8fafc] md:text-6xl">
+                  Producto principal
+                </h3>
+              </div>
+              <span class="w-fit rounded-full bg-[#d9f99d] px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-[#080a12]">
+                Disponible
+              </span>
+            </div>
+
+            <div class="grid gap-6 md:grid-cols-[0.8fr_1.2fr] md:items-end">
+              <div class="min-h-[260px] rounded-[2rem] bg-[radial-gradient(circle_at_34%_24%,rgba(248,250,252,0.95),transparent_14%),radial-gradient(circle_at_64%_60%,rgba(34,197,94,0.72),transparent_28%),linear-gradient(135deg,#3054ff,#101522_72%)] shadow-2xl shadow-[#3054ff]/24"></div>
+              <div>
+                <p class="text-base font-medium leading-8 text-[#f8fafc]/68">
+                  Una opción destacada para mostrar lo más importante de la marca desde el primer recorrido, con contexto suficiente para invitar a consultar.
+                </p>
+                <a
+                  href={whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="mt-6 inline-flex min-h-11 items-center justify-center rounded-full bg-[#f8fafc] px-5 py-3 text-sm font-extrabold text-[#080a12] transition hover:-translate-y-0.5 hover:bg-[#d9f99d]"
+                >
+                  Consultar
+                </a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <div class="flex flex-col gap-5">
+          {secondaryProducts.map((product) => (
+            <article class="group relative flex min-h-[160px] flex-col justify-between overflow-hidden rounded-[1.8rem] border border-white/[0.08] bg-[#141b2d] p-6 shadow-xl shadow-black/20 transition hover:-translate-y-1 hover:border-[#38bdf8]/28">
+              <div class="absolute right-5 top-5 h-16 w-16 rounded-full border border-[#38bdf8]/20 opacity-70 transition group-hover:scale-110"></div>
+              <div class="relative">
+                <p class="text-xs font-extrabold uppercase tracking-[0.20em] text-[#38bdf8]">{product.tag}</p>
+                <h3 class="venture-display mt-3 text-2xl font-black leading-tight tracking-[-0.035em] text-[#f8fafc]">{product.title}</h3>
+                <p class="mt-3 max-w-sm text-sm font-medium leading-[1.7] text-[#f8fafc]/64">{product.text}</p>
+              </div>
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="relative mt-6 w-fit text-xs font-extrabold uppercase tracking-[0.18em] text-[#d9f99d] transition group-hover:text-[#38bdf8]"
+              >
+                Consultar
+              </a>
+            </article>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="historia" class="relative px-5 py-16 md:py-24 lg:px-8">
+    <div class="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.75fr_1.25fr] lg:items-center">
+      <div class="relative">
+        <p class="text-xs font-extrabold uppercase tracking-[0.22em] text-[#38bdf8]">Historia de marca</p>
+        <p class="venture-display mt-5 text-[clamp(7rem,18vw,15rem)] font-black leading-none tracking-[-0.08em] text-[#f8fafc]/8">
+          01
+        </p>
+        <div class="absolute bottom-4 right-4 h-28 w-28 rounded-full bg-[#22c55e]/18 blur-2xl"></div>
+      </div>
+
+      <div class="grid gap-8 lg:grid-cols-[1fr_0.72fr] lg:items-stretch">
+        <article class="border-l border-[#38bdf8]/24 pl-6 md:pl-8">
+          <h2 class="venture-display max-w-2xl text-4xl font-black leading-[0.96] tracking-[-0.055em] text-[#f8fafc] md:text-6xl">
+            Una marca cercana, clara y fácil de contactar
+          </h2>
+          <p class="mt-6 max-w-2xl text-lg font-medium leading-[1.8] text-[#f8fafc]/70">
+            Este espacio reúne la información principal del negocio para que las personas puedan conocer la propuesta, revisar productos y escribir directamente por WhatsApp.
+          </p>
+          <div class="mt-8 flex flex-col gap-4 border-y border-white/[0.08] py-5 sm:flex-row sm:items-center sm:justify-between">
+            {storyValues.map((value) => (
+              <span class="text-sm font-extrabold uppercase tracking-[0.18em] text-[#d9f99d]">{value}</span>
+            ))}
+          </div>
+        </article>
+
+        <div class="relative min-h-[340px] overflow-hidden rounded-[2.2rem] border border-white/[0.08] bg-[#101522] shadow-2xl shadow-black/30">
+          <div class="absolute inset-0 bg-[radial-gradient(circle_at_32%_26%,rgba(56,189,248,0.46),transparent_22%),radial-gradient(circle_at_68%_64%,rgba(34,197,94,0.36),transparent_26%),linear-gradient(135deg,#101522,#080a12)]"></div>
+          <div class="absolute left-8 top-8 h-32 w-24 rounded-[1.5rem] border border-white/[0.10] bg-white/[0.06]"></div>
+          <div class="absolute bottom-8 right-8 h-40 w-28 rounded-[1.7rem] border border-[#38bdf8]/20 bg-[#3054ff]/18"></div>
+          <div class="absolute bottom-8 left-8 right-8 rounded-2xl border border-white/[0.08] bg-[#080a12]/70 p-5 backdrop-blur-md">
+            <p class="text-xs font-extrabold uppercase tracking-[0.20em] text-[#38bdf8]">Identidad</p>
+            <p class="mt-2 text-sm font-medium leading-6 text-[#f8fafc]/66">
+              Un bloque visual para comunicar personalidad, origen y tono de la marca.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="beneficios" class="relative border-y border-white/[0.08] bg-[#0b0e18] px-5 py-16 md:py-24 lg:px-8">
+    <div class="mx-auto max-w-7xl">
+      <div class="max-w-3xl">
+        <p class="text-xs font-extrabold uppercase tracking-[0.22em] text-[#38bdf8]">Manifiesto</p>
+        <h2 class="venture-display mt-3 text-4xl font-black leading-tight tracking-[-0.045em] text-[#f8fafc] md:text-5xl">
+          Información útil para decidir y escribir
+        </h2>
+        <p class="mt-4 text-base font-medium leading-7 text-[#f8fafc]/64">
+          En lugar de esconder lo importante, la página convierte la información básica de la marca en una ruta clara.
+        </p>
+      </div>
+
+      <div class="mt-10 divide-y divide-white/[0.08] border-y border-white/[0.08]">
+        {manifestoItems.map((item, index) => (
+          <article class="group grid gap-4 py-7 transition md:grid-cols-[0.18fr_0.42fr_0.4fr] md:items-center md:py-8">
+            <span class="venture-display text-5xl font-black leading-none tracking-[-0.06em] text-[#3054ff] transition group-hover:text-[#38bdf8]">
+              {String(index + 1).padStart(2, "0")}
+            </span>
+            <h3 class="venture-display text-3xl font-black leading-tight tracking-[-0.04em] text-[#f8fafc]">{item.title}</h3>
+            <p class="text-sm font-medium leading-[1.8] text-[#f8fafc]/64 md:text-base">{item.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto" class="relative px-5 py-16 md:py-24 lg:px-8">
+    <div class="mx-auto max-w-7xl overflow-hidden rounded-[2.4rem] border border-white/[0.08] bg-[#101522] shadow-2xl shadow-black/35">
+      <div class="grid lg:grid-cols-[0.88fr_1.12fr]">
+        <div class="relative border-b border-white/[0.08] p-7 md:p-10 lg:border-b-0 lg:border-r">
+          <div class="absolute right-[-90px] top-[-90px] h-56 w-56 rounded-full bg-[#22c55e]/14 blur-3xl"></div>
+          <p class="relative text-xs font-extrabold uppercase tracking-[0.22em] text-[#38bdf8]">Contacto y redes</p>
+          <h2 class="venture-display relative mt-3 max-w-xl text-4xl font-black leading-tight tracking-[-0.045em] text-[#f8fafc] md:text-5xl">
+            Canales simples para escribir o seguir la marca
+          </h2>
+          <div class="relative mt-8 divide-y divide-white/[0.08] border-y border-white/[0.08]">
+            {contactItems.map((item) => (
+              <div class="flex items-center justify-between gap-4 py-4">
+                <span class="text-xs font-extrabold uppercase tracking-[0.18em] text-[#f8fafc]/42">{item.label}</span>
+                <span class="text-right text-sm font-bold text-[#f8fafc]/84">{item.value}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="relative flex min-h-[360px] flex-col justify-between overflow-hidden bg-[#080a12] p-7 md:p-10">
+          <div class="absolute inset-0 bg-[radial-gradient(circle_at_74%_24%,rgba(48,84,255,0.34),transparent_30%),radial-gradient(circle_at_22%_78%,rgba(34,197,94,0.18),transparent_32%)]"></div>
+          <div class="relative ml-auto h-28 w-28 rounded-full border border-[#38bdf8]/20 bg-[#3054ff]/14"></div>
+          <div class="relative max-w-xl">
+            <p class="text-xs font-extrabold uppercase tracking-[0.22em] text-[#d9f99d]">Consulta directa</p>
+            <h3 class="venture-display mt-3 text-4xl font-black leading-[0.96] tracking-[-0.055em] text-[#f8fafc] md:text-6xl">
+              Escriba para consultar productos, servicios o disponibilidad.
+            </h3>
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="mt-8 inline-flex min-h-12 items-center justify-center rounded-full bg-[#f8fafc] px-7 py-3 text-sm font-extrabold text-[#080a12] shadow-2xl shadow-[#38bdf8]/18 transition hover:-translate-y-0.5 hover:bg-[#d9f99d] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#38bdf8] focus-visible:ring-offset-2 focus-visible:ring-offset-[#080a12]"
+            >
+              Escribir por WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="relative px-5 pb-20 lg:px-8">
+    <div class="mx-auto max-w-5xl rounded-[2rem] border border-[#38bdf8]/18 bg-[#0b0e18] p-8 text-center shadow-2xl shadow-black/35 md:p-12">
+      <p class="text-sm font-extrabold text-[#38bdf8]">Demo conceptual — no corresponde a un cliente real</p>
+      <h2 class="venture-display mx-auto mt-3 max-w-3xl text-4xl font-black leading-tight tracking-[-0.045em] text-[#f8fafc] md:text-5xl">
+        ¿Quiere una página similar para su emprendimiento?
+      </h2>
+      <p class="mx-auto mt-4 max-w-2xl text-base font-medium leading-7 text-[#f8fafc]/64">
+        Esta es una demo conceptual creada por FENRIR Soluciones Digitales para mostrar cómo podría verse una página adaptada a una marca pequeña, emprendimiento o negocio emergente.
+      </p>
+      <div class="mt-8">
+        <a
+          href={whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex min-h-12 items-center justify-center rounded-full bg-[#3054ff] px-7 py-3 text-sm font-extrabold text-white shadow-2xl shadow-[#3054ff]/28 transition hover:-translate-y-0.5 hover:bg-[#2444d8] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#38bdf8] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0b0e18]"
+        >
+          Solicitar una recomendación
+        </a>
+      </div>
+    </div>
+  </section>
 </main>

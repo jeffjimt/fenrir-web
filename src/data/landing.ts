@@ -158,6 +158,8 @@ export const demoPages = [
     variant: "health",
     name: "Página demo para clínicas",
     seoTitle: "Demo para clínicas | FENRIR Soluciones Digitales",
+    metaDescription:
+      "Demo conceptual de página web para clínicas y servicios de salud, diseñada para mostrar servicios, horarios, ubicación y contacto de forma clara.",
     category: "Clínicas y servicios de salud",
     label: "Demo conceptual — no corresponde a un cliente real",
     heroTitle: "Una página clara para clínicas y servicios de salud",

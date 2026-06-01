@@ -1,68 +1,118 @@
 ---
 import { getWhatsappUrl, siteConfig } from "../config/site";
 
-interface Demo {
-  label: string;
-  message: string;
-}
-
 interface Props {
-  demo: Demo;
+  demo?: unknown;
 }
 
-const { demo } = Astro.props;
-const whatsappUrl = getWhatsappUrl(demo.message);
+const clinicWhatsappMessage =
+  "Hola, vi la demo para clínicas y quiero una recomendación para mi negocio.";
+const whatsappUrl = getWhatsappUrl(clinicWhatsappMessage);
 
-const infoCards = [
+const services = [
   {
-    title: "Servicios disponibles",
-    text: "Organice especialidades, áreas de atención o servicios profesionales en una estructura fácil de recorrer.",
+    title: "Consulta general",
+    text: "Atención inicial para orientar consultas frecuentes, revisar necesidades básicas y definir próximos pasos.",
   },
   {
-    title: "Horarios de atención",
-    text: "Muestre disponibilidad, días de atención y canales para coordinar consultas administrativas.",
+    title: "Control y seguimiento",
+    text: "Espacios para dar continuidad a consultas, revisiones y procesos de atención ya iniciados.",
   },
   {
-    title: "Ubicación y contacto",
-    text: "Integre dirección, zona de atención, WhatsApp y datos prácticos para facilitar el primer contacto.",
+    title: "Orientación al paciente",
+    text: "Información clara sobre horarios, canales disponibles y preparación antes de visitar.",
   },
   {
-    title: "Información antes de visitar",
-    text: "Incluya indicaciones generales, preparación previa o documentos necesarios sin hacer promesas médicas.",
+    title: "Información para visitantes",
+    text: "Datos útiles para quienes necesitan confirmar ubicación, disponibilidad o servicios generales.",
   },
 ];
 
-const structureItems = ["Inicio", "Servicios", "Información útil", "Ubicación", "Contacto"];
+const careItems = [
+  {
+    title: "Horario general",
+    value: "Lunes a viernes",
+    detail: "8:00 a.m. - 5:00 p.m.",
+  },
+  {
+    title: "Disponibilidad",
+    value: "Atención según agenda",
+    detail: "Consulte antes de visitar.",
+  },
+  {
+    title: "WhatsApp",
+    value: "Canal disponible",
+    detail: "Para consultas administrativas.",
+  },
+];
+
+const patientInfo = [
+  "Tenga a mano su información básica antes de consultar.",
+  "Consulte horarios antes de visitar el centro.",
+  "Confirme disponibilidad por WhatsApp.",
+  "Revise indicaciones generales según el servicio.",
+];
+
+const locationDetails = [
+  "Costa Rica",
+  "Atención presencial según disponibilidad",
+  "Contacto previo recomendado",
+];
 ---
 
-<main class="relative -mt-[73px] w-full max-w-[100vw] overflow-x-hidden bg-[#f8fbff] pt-[73px] text-slate-950">
+<style is:global>
+  @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
+
+  .clinic-demo-page {
+    font-family: "Plus Jakarta Sans", "Manrope", system-ui, sans-serif;
+  }
+
+  .clinic-demo-page h1,
+  .clinic-demo-page h2,
+  .clinic-demo-page h3 {
+    font-family: "Plus Jakarta Sans", "Manrope", system-ui, sans-serif;
+  }
+</style>
+
+<main class="clinic-demo-page relative -mt-[73px] w-full max-w-[100vw] overflow-x-hidden bg-[#f7fbff] pt-[73px] text-[#0f172a]">
   <div class="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-    <div class="absolute -left-32 top-16 h-80 w-80 rounded-full bg-[#60b1ff]/24 blur-3xl"></div>
-    <div class="absolute right-[-160px] top-28 h-[460px] w-[460px] rounded-full bg-blue-500/14 blur-3xl"></div>
-    <div class="absolute bottom-40 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-cyan-200/26 blur-3xl"></div>
+    <div class="absolute left-[-180px] top-[-140px] h-[460px] w-[460px] rounded-full bg-[#60b1ff]/24 blur-3xl"></div>
+    <div class="absolute right-[-220px] top-[16%] h-[560px] w-[560px] rounded-full bg-[#2563eb]/12 blur-3xl"></div>
+    <div class="absolute bottom-[18%] left-[40%] h-80 w-80 -translate-x-1/2 rounded-full bg-[#14b8a6]/10 blur-3xl"></div>
+    <div class="absolute inset-x-0 top-0 h-[720px] bg-[linear-gradient(rgba(37,99,235,0.042)_1px,transparent_1px),linear-gradient(90deg,rgba(37,99,235,0.035)_1px,transparent_1px)] bg-[size:56px_56px] opacity-45 [mask-image:linear-gradient(to_bottom,black,transparent_78%)]"></div>
   </div>
 
-  <header class="fixed left-0 right-0 top-0 z-50 overflow-hidden border-b border-slate-950/[0.08] bg-white/72 backdrop-blur-2xl">
+  <header class="fixed left-0 right-0 top-0 z-50 border-b border-slate-950/[0.08] bg-white/78 backdrop-blur-2xl">
     <div class="mx-auto flex min-h-[73px] w-full max-w-7xl items-center justify-between gap-3 px-5 lg:px-8">
       <a
-        href="/"
-        class="flex min-w-0 items-center gap-3 text-slate-950 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
+        href="#inicio-clinica"
+        class="group flex min-w-0 items-center gap-3 text-[#0f172a] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb] focus-visible:ring-offset-2"
+        aria-label="Centro Médico Integral"
       >
-        <img
-          src={siteConfig.assets.isotipo}
-          alt=""
-          width="32"
-          height="32"
-          class="h-8 w-8"
-          aria-hidden="true"
-        />
-        <span class="hidden text-sm font-bold tracking-[0.18em] sm:inline">FENRIR</span>
+        <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl border border-slate-950/[0.08] bg-white shadow-sm shadow-blue-950/[0.05]">
+          <span class="h-4 w-4 rounded-full bg-[#2563eb] shadow-[0_0_0_7px_rgba(96,177,255,0.22)]"></span>
+        </span>
+        <span class="min-w-0">
+          <span class="block text-sm font-extrabold tracking-[-0.02em] sm:text-base">Centro Médico Integral</span>
+          <span class="block text-[0.68rem] font-bold text-[#475569]">Servicios de salud</span>
+        </span>
       </a>
 
-      <nav class="flex min-w-0 shrink-0 items-center gap-2 sm:gap-3" aria-label="Navegación demo">
+      <nav class="hidden items-center gap-5 text-sm font-bold text-[#475569] lg:flex" aria-label="Navegación de Centro Médico Integral">
+        <a href="#servicios-salud" class="transition hover:text-[#2563eb]">Servicios</a>
+        <a href="#horarios-salud" class="transition hover:text-[#2563eb]">Horarios</a>
+        <a href="#ubicacion-salud" class="transition hover:text-[#2563eb]">Ubicación</a>
+        <a href="#pacientes-salud" class="transition hover:text-[#2563eb]">Pacientes</a>
+        <a href="#contacto-salud" class="transition hover:text-[#2563eb]">Contacto</a>
+      </nav>
+
+      <div class="flex min-w-0 shrink-0 items-center gap-2 sm:gap-3">
+        <span class="hidden rounded-full border border-[#2563eb]/15 bg-[#2563eb]/5 px-3 py-1 text-[0.62rem] font-extrabold uppercase tracking-[0.18em] text-[#2563eb] md:inline-flex">
+          Demo conceptual
+        </span>
         <a
           href="/#ejemplos"
-          class="inline-flex rounded-full px-3 py-2 text-sm font-bold text-slate-600 transition hover:bg-slate-950/[0.04] hover:text-slate-950 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 sm:px-4"
+          class="inline-flex min-h-10 items-center rounded-full px-3 py-2 text-sm font-bold text-[#475569] transition hover:bg-slate-950/[0.04] hover:text-[#0f172a] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb]"
         >
           <span class="sm:hidden">Volver</span>
           <span class="hidden sm:inline">Volver a FENRIR</span>
@@ -71,182 +121,241 @@ const structureItems = ["Inicio", "Servicios", "Información útil", "Ubicación
           href={whatsappUrl}
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-blue-600 text-sm font-bold text-white shadow-lg shadow-blue-600/20 transition hover:bg-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 sm:w-auto sm:px-5"
-          aria-label="Quiero una página similar"
+          class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-[#2563eb] text-sm font-extrabold text-white shadow-lg shadow-blue-600/20 transition hover:-translate-y-0.5 hover:bg-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb] focus-visible:ring-offset-2 sm:w-auto sm:px-5"
+          aria-label="Solicitar información por WhatsApp"
         >
           <span class="sm:hidden" aria-hidden="true">→</span>
-          <span class="hidden sm:inline">Quiero una página similar</span>
+          <span class="hidden sm:inline">Solicitar información</span>
         </a>
-      </nav>
+      </div>
     </div>
   </header>
 
-  <section class="relative w-full max-w-[100vw] px-5 pb-16 pt-16 md:pb-24 md:pt-24 lg:px-8">
-    <div class="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[0.95fr_1.05fr]">
+  <section id="inicio-clinica" class="relative px-5 pb-14 pt-12 md:pb-20 md:pt-18 lg:px-8">
+    <div class="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
       <div class="min-w-0">
-        <p class="inline-flex rounded-full border border-slate-950/[0.08] bg-white/70 px-4 py-2 text-xs font-bold uppercase tracking-[0.20em] text-blue-700 shadow-sm shadow-blue-950/[0.03] backdrop-blur-xl">
-          Demo conceptual para clínicas
+        <p class="inline-flex rounded-full border border-[#2563eb]/15 bg-white/72 px-4 py-2 text-[0.68rem] font-extrabold uppercase tracking-[0.20em] text-[#2563eb] shadow-sm shadow-blue-950/[0.03] backdrop-blur-xl">
+          Atención, horarios y contacto
         </p>
-        <p class="mt-4 max-w-xl text-sm font-bold text-slate-500">
-          {demo.label}
-        </p>
-        <h1 class="mt-6 max-w-full font-display text-4xl font-bold tracking-[-0.04em] leading-[1.05] tracking-normal text-slate-950 sm:max-w-3xl sm:text-5xl lg:text-6xl">
-          Una página clara para servicios de salud
+        <h1 class="mt-6 max-w-4xl text-[clamp(2.65rem,7vw,5.8rem)] font-extrabold leading-[0.98] tracking-[-0.055em] text-[#0f172a]">
+          Atención médica clara, cercana y fácil de consultar
         </h1>
-        <p class="mt-6 max-w-full text-base leading-7 text-slate-600 sm:max-w-2xl sm:text-lg sm:leading-8">
-          Un diseño pensado para presentar servicios, horarios, ubicación e
-          información importante de forma ordenada y fácil de consultar.
+        <p class="mt-6 max-w-2xl text-base font-medium leading-[1.75] text-[#475569] sm:text-lg">
+          Consulte servicios, horarios, ubicación y canales de atención en un solo lugar, de forma rápida y sencilla.
         </p>
         <div class="mt-8 flex flex-col gap-3 sm:flex-row">
           <a
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex min-h-12 items-center justify-center rounded-full bg-blue-600 px-6 py-3 text-sm font-bold text-white shadow-xl shadow-blue-600/20 transition hover:-translate-y-0.5 hover:bg-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
+            class="inline-flex min-h-12 items-center justify-center rounded-full bg-[#2563eb] px-6 py-3 text-sm font-extrabold text-white shadow-xl shadow-blue-600/20 transition hover:-translate-y-0.5 hover:bg-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb] focus-visible:ring-offset-2"
           >
-            Quiero una página similar
+            Solicitar información
           </a>
           <a
-            href="#estructura"
-            class="inline-flex min-h-12 items-center justify-center rounded-full border border-slate-950/[0.08] bg-white/70 px-6 py-3 text-sm font-bold text-slate-950 shadow-sm shadow-slate-950/[0.04] backdrop-blur-xl transition hover:-translate-y-0.5 hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
+            href="#servicios-salud"
+            class="inline-flex min-h-12 items-center justify-center rounded-full border border-slate-950/[0.10] bg-white/72 px-6 py-3 text-sm font-extrabold text-[#0f172a] shadow-sm shadow-slate-950/[0.04] backdrop-blur-xl transition hover:-translate-y-0.5 hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb] focus-visible:ring-offset-2"
           >
-            Ver estructura
+            Ver servicios
           </a>
         </div>
       </div>
 
-      <div class="relative min-w-0">
-        <div class="rounded-[2rem] border border-white/70 bg-white/58 p-4 shadow-2xl shadow-blue-950/10 backdrop-blur-2xl sm:p-6">
-          <div class="min-w-0 overflow-hidden rounded-[1.5rem] border border-slate-950/[0.08] bg-white/86 shadow-xl shadow-slate-950/[0.06]">
-            <div class="border-b border-slate-950/[0.07] bg-white/88 px-5 py-4">
-              <div class="flex min-w-0 items-center justify-between gap-3">
-                <div class="min-w-0">
-                  <p class="text-xs font-bold uppercase tracking-[0.22em] text-blue-600">
-                    Página demo
-                  </p>
-                  <p class="mt-1 text-sm font-bold text-slate-950">
-                    Servicios de salud
-                  </p>
-                </div>
-                <span class="hidden shrink-0 rounded-full bg-blue-50 px-3 py-1 text-xs font-bold uppercase tracking-[0.14em] text-blue-700 sm:inline-flex">
-                  Solicitud de cita
-                </span>
-              </div>
+      <div class="grid gap-4">
+        <div class="rounded-[2rem] border border-slate-950/[0.08] bg-white/82 p-6 shadow-xl shadow-blue-950/[0.07] backdrop-blur-xl">
+          <div class="flex items-start justify-between gap-4">
+            <div>
+              <p class="text-xs font-extrabold uppercase tracking-[0.20em] text-[#2563eb]">Hoy</p>
+              <h2 class="mt-3 text-2xl font-extrabold leading-tight tracking-[-0.04em] text-[#0f172a]">
+                Información disponible para pacientes y visitantes
+              </h2>
             </div>
-
-            <div class="grid gap-4 p-5">
-              <div class="rounded-2xl bg-gradient-to-br from-blue-600 to-[#60b1ff] p-5 text-white">
-                <p class="text-sm font-bold text-white/82">Información clara</p>
-                <h2 class="mt-3 font-display text-3xl font-bold tracking-[-0.04em] leading-tight">
-                  Servicios, horario y contacto en un solo lugar
-                </h2>
-              </div>
-
-              <div class="grid gap-3 sm:grid-cols-2">
-                {["Servicios", "Horario", "Ubicación", "Contacto"].map((item) => (
-                  <div class="rounded-2xl border border-slate-950/[0.08] bg-white/80 p-4 shadow-sm shadow-slate-950/[0.03]">
-                    <span class="block h-2 w-12 rounded-full bg-blue-200"></span>
-                    <p class="mt-4 text-sm font-bold text-slate-950">{item}</p>
-                  </div>
-                ))}
-              </div>
-
-              <div class="rounded-2xl border border-blue-200/80 bg-blue-50/80 p-4">
-                <div class="flex items-center justify-between gap-4">
-                  <div>
-                    <p class="text-sm font-bold text-slate-950">Solicitud de cita</p>
-                    <p class="mt-1 text-xs leading-5 text-slate-600">
-                      Botón directo a WhatsApp con mensaje listo.
-                    </p>
-                  </div>
-                  <span class="h-10 w-10 rounded-full bg-blue-600 shadow-lg shadow-blue-600/20"></span>
-                </div>
-              </div>
-            </div>
+            <span class="rounded-full bg-[#14b8a6]/10 px-3 py-1 text-xs font-extrabold text-[#0f766e]">Abierto</span>
           </div>
+
+          <div class="mt-6 grid gap-3 sm:grid-cols-2">
+            <article class="rounded-3xl bg-[#f7fbff] p-5 ring-1 ring-slate-950/[0.08]">
+              <p class="text-xs font-extrabold uppercase tracking-[0.18em] text-[#2563eb]">Horario</p>
+              <p class="mt-4 text-xl font-extrabold text-[#0f172a]">8:00 a.m. - 5:00 p.m.</p>
+              <p class="mt-2 text-sm font-medium leading-6 text-[#475569]">Lunes a viernes</p>
+            </article>
+            <article class="rounded-3xl bg-[#2563eb] p-5 text-white shadow-lg shadow-blue-600/20">
+              <p class="text-xs font-extrabold uppercase tracking-[0.18em] text-white/72">Contacto</p>
+              <p class="mt-4 text-xl font-extrabold leading-tight">WhatsApp disponible</p>
+              <p class="mt-2 text-sm font-medium leading-6 text-white/72">Para confirmar información.</p>
+            </article>
+          </div>
+        </div>
+
+        <div class="grid gap-4 sm:grid-cols-2">
+          <article class="rounded-[1.5rem] border border-slate-950/[0.08] bg-white/78 p-5 shadow-sm shadow-blue-950/[0.04] backdrop-blur-xl">
+            <p class="text-xs font-extrabold uppercase tracking-[0.18em] text-[#2563eb]">Ubicación</p>
+            <p class="mt-4 text-lg font-extrabold text-[#0f172a]">{siteConfig.location}</p>
+            <p class="mt-2 text-sm font-medium leading-6 text-[#475569]">Contacto previo recomendado.</p>
+          </article>
+          <article class="rounded-[1.5rem] border border-slate-950/[0.08] bg-white/78 p-5 shadow-sm shadow-blue-950/[0.04] backdrop-blur-xl">
+            <p class="text-xs font-extrabold uppercase tracking-[0.18em] text-[#2563eb]">Servicios</p>
+            <p class="mt-4 text-lg font-extrabold text-[#0f172a]">Consulta y seguimiento</p>
+            <p class="mt-2 text-sm font-medium leading-6 text-[#475569]">Información general para visitantes.</p>
+          </article>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="relative border-y border-slate-950/[0.06] bg-white/62 px-5 py-16 backdrop-blur-xl md:py-20 lg:px-8">
+  <section id="servicios-salud" class="relative border-y border-slate-950/[0.06] bg-white/72 px-5 py-16 backdrop-blur-xl md:py-20 lg:px-8">
     <div class="mx-auto max-w-7xl">
       <div class="max-w-3xl">
-        <p class="text-sm font-bold text-blue-700">Información esencial</p>
-        <h2 class="mt-3 font-display text-3xl font-bold tracking-[-0.04em] text-slate-950 md:text-4xl">
-          Información que el paciente necesita
+        <p class="text-xs font-extrabold uppercase tracking-[0.22em] text-[#2563eb]">Servicios principales</p>
+        <h2 class="mt-3 text-3xl font-extrabold leading-tight tracking-[-0.045em] text-[#0f172a] md:text-5xl">
+          Atención organizada para consultar con claridad
         </h2>
-        <p class="mt-4 text-base leading-7 text-slate-600">
-          Una página de este tipo debe resolver dudas prácticas con orden,
-          claridad y sin saturar al visitante.
+        <p class="mt-4 text-base font-medium leading-[1.75] text-[#475569] md:text-lg">
+          Los servicios se presentan de forma simple para que cada persona pueda entender qué opciones están disponibles antes de escribir.
         </p>
       </div>
 
       <div class="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-        {infoCards.map((card) => (
-          <article class="rounded-3xl border border-slate-950/[0.08] bg-white/78 p-6 shadow-xl shadow-blue-950/[0.04] backdrop-blur-xl">
-            <span class="flex h-10 w-10 items-center justify-center rounded-2xl bg-blue-50 text-sm font-bold text-blue-700">
-              +
+        {services.map((service, index) => (
+          <article class="rounded-[1.75rem] border border-slate-950/[0.08] bg-white p-6 shadow-sm shadow-blue-950/[0.04] transition hover:-translate-y-1 hover:shadow-xl hover:shadow-blue-950/[0.07]">
+            <span class="flex h-10 w-10 items-center justify-center rounded-full bg-[#2563eb]/10 text-sm font-extrabold text-[#2563eb]">
+              {String(index + 1).padStart(2, "0")}
             </span>
-            <h3 class="mt-5 font-display text-lg font-bold leading-tight tracking-[-0.035em] text-slate-950">{card.title}</h3>
-            <p class="mt-3 text-sm font-medium leading-[1.7] text-slate-600">{card.text}</p>
+            <h3 class="mt-8 text-xl font-extrabold leading-tight tracking-[-0.035em] text-[#0f172a]">{service.title}</h3>
+            <p class="mt-3 text-sm font-medium leading-[1.75] text-[#475569]">{service.text}</p>
           </article>
         ))}
       </div>
     </div>
   </section>
 
-  <section id="estructura" class="relative px-5 py-16 md:py-24 lg:px-8">
-    <div class="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.85fr_1.15fr]">
-      <div>
-        <p class="text-sm font-bold text-blue-700">Estructura sugerida</p>
-        <h2 class="mt-3 font-display text-3xl font-bold tracking-[-0.04em] text-slate-950 md:text-4xl">
-          Un recorrido simple para entender y contactar
+  <section id="horarios-salud" class="relative px-5 py-16 md:py-24 lg:px-8">
+    <div class="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.78fr_1.22fr] lg:items-start">
+      <div class="lg:sticky lg:top-28">
+        <p class="text-xs font-extrabold uppercase tracking-[0.22em] text-[#2563eb]">Horarios y atención</p>
+        <h2 class="mt-3 text-3xl font-extrabold leading-tight tracking-[-0.045em] text-[#0f172a] md:text-5xl">
+          Consulte antes de visitar
         </h2>
-        <p class="mt-4 text-base leading-7 text-slate-600">
-          Esta organización ayuda a presentar información importante de forma
-          progresiva, sin inventar confianza ni promesas médicas.
+        <p class="mt-4 text-base font-medium leading-[1.75] text-[#475569]">
+          La información de atención se mantiene visible para evitar dudas básicas sobre horarios, disponibilidad y canales administrativos.
         </p>
       </div>
 
-      <div class="rounded-[2rem] border border-slate-950/[0.08] bg-white/70 p-4 shadow-2xl shadow-blue-950/[0.07] backdrop-blur-2xl sm:p-5">
-        <div class="grid gap-3">
-          {structureItems.map((item, index) => (
-            <div class="flex items-center gap-4 rounded-2xl border border-slate-950/[0.06] bg-white/82 p-4">
-              <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-blue-600 text-sm font-bold text-white">
+      <div class="grid gap-4 md:grid-cols-3">
+        {careItems.map((item) => (
+          <article class="rounded-[2rem] border border-slate-950/[0.08] bg-white p-6 shadow-sm shadow-blue-950/[0.05]">
+            <p class="text-xs font-extrabold uppercase tracking-[0.20em] text-[#2563eb]">{item.title}</p>
+            <h3 class="mt-5 text-2xl font-extrabold leading-tight tracking-[-0.04em] text-[#0f172a]">{item.value}</h3>
+            <p class="mt-3 text-sm font-medium leading-[1.75] text-[#475569]">{item.detail}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="ubicacion-salud" class="relative border-y border-slate-950/[0.06] bg-white/58 px-5 py-16 backdrop-blur-xl md:py-20 lg:px-8">
+    <div class="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1fr_0.92fr] lg:items-center">
+      <div>
+        <p class="text-xs font-extrabold uppercase tracking-[0.22em] text-[#2563eb]">Ubicación</p>
+        <h2 class="mt-3 text-3xl font-extrabold leading-tight tracking-[-0.045em] text-[#0f172a] md:text-5xl">
+          Información de visita en un bloque claro
+        </h2>
+        <p class="mt-4 max-w-2xl text-base font-medium leading-[1.75] text-[#475569]">
+          Un bloque visual sencillo permite orientar al visitante sin depender de un mapa externo o datos que cambian con frecuencia.
+        </p>
+      </div>
+
+      <div class="overflow-hidden rounded-[2rem] border border-slate-950/[0.08] bg-[#eaf7ff] p-5 shadow-xl shadow-blue-950/[0.06]">
+        <div class="relative min-h-[320px] overflow-hidden rounded-[1.5rem] bg-white">
+          <div class="absolute inset-0 bg-[linear-gradient(90deg,rgba(37,99,235,0.08)_1px,transparent_1px),linear-gradient(rgba(37,99,235,0.08)_1px,transparent_1px)] bg-[size:32px_32px]"></div>
+          <div class="absolute left-[18%] top-[18%] h-28 w-28 rounded-full bg-[#60b1ff]/40 blur-2xl"></div>
+          <div class="absolute bottom-[16%] right-[16%] h-36 w-36 rounded-full bg-[#14b8a6]/20 blur-2xl"></div>
+          <div class="absolute left-1/2 top-1/2 h-16 w-16 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#2563eb] shadow-[0_0_0_12px_rgba(37,99,235,0.12),0_0_0_28px_rgba(96,177,255,0.14)]"></div>
+          <div class="absolute bottom-5 left-5 right-5 grid gap-3 rounded-2xl border border-slate-950/[0.08] bg-white/86 p-4 backdrop-blur-xl sm:grid-cols-3">
+            {locationDetails.map((item) => (
+              <p class="text-sm font-bold leading-6 text-[#475569]">{item}</p>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pacientes-salud" class="relative px-5 py-16 md:py-24 lg:px-8">
+    <div class="mx-auto max-w-7xl">
+      <div class="grid gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
+        <div class="lg:sticky lg:top-28">
+          <p class="text-xs font-extrabold uppercase tracking-[0.22em] text-[#2563eb]">Información para pacientes</p>
+          <h2 class="mt-3 text-3xl font-extrabold leading-tight tracking-[-0.045em] text-[#0f172a] md:text-5xl">
+            Antes de solicitar información
+          </h2>
+          <p class="mt-4 text-base font-medium leading-[1.75] text-[#475569]">
+            La información útil se presenta como parte del servicio para que el visitante llegue mejor orientado.
+          </p>
+        </div>
+
+        <div class="grid gap-4 sm:grid-cols-2">
+          {patientInfo.map((item, index) => (
+            <article class="rounded-[1.6rem] border border-slate-950/[0.08] bg-white p-6 shadow-sm shadow-blue-950/[0.04]">
+              <span class="flex h-10 w-10 items-center justify-center rounded-full bg-[#14b8a6]/10 text-sm font-extrabold text-[#0f766e]">
                 {String(index + 1).padStart(2, "0")}
               </span>
-              <div>
-                <h3 class="text-sm font-bold text-slate-950">{item}</h3>
-                <p class="mt-1 text-sm leading-6 text-slate-600">
-                  Bloque preparado para orientar al visitante con información clara.
-                </p>
-              </div>
-            </div>
+              <p class="mt-6 text-base font-bold leading-7 text-[#475569]">{item}</p>
+            </article>
           ))}
         </div>
       </div>
     </div>
   </section>
 
+  <section id="contacto-salud" class="relative px-5 pb-16 lg:px-8">
+    <div class="mx-auto grid max-w-7xl gap-6 rounded-[2rem] border border-slate-950/[0.08] bg-white p-6 shadow-2xl shadow-blue-950/[0.08] md:p-8 lg:grid-cols-[1fr_0.8fr] lg:items-center">
+      <div>
+        <p class="text-xs font-extrabold uppercase tracking-[0.22em] text-[#2563eb]">Contacto</p>
+        <h2 class="mt-3 text-3xl font-extrabold leading-tight tracking-[-0.045em] text-[#0f172a] md:text-5xl">
+          ¿Necesita más información?
+        </h2>
+        <p class="mt-4 max-w-2xl text-base font-medium leading-[1.75] text-[#475569]">
+          Puede consultar horarios, servicios disponibles o detalles de atención por WhatsApp.
+        </p>
+      </div>
+      <div class="rounded-[1.5rem] border border-slate-950/[0.08] bg-[#f7fbff] p-5">
+        <div class="grid gap-3">
+          {["Servicios disponibles", "Horario general", "Ubicación y visita"].map((item) => (
+            <div class="rounded-2xl bg-white p-4 text-sm font-bold text-[#475569] ring-1 ring-slate-950/[0.06]">
+              {item}
+            </div>
+          ))}
+          <a
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex min-h-12 items-center justify-center rounded-full bg-[#2563eb] px-7 py-3 text-sm font-extrabold text-white shadow-xl shadow-blue-600/20 transition hover:-translate-y-0.5 hover:bg-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb] focus-visible:ring-offset-2"
+          >
+            Escribir por WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="relative px-5 pb-20 lg:px-8">
-    <div class="mx-auto max-w-5xl rounded-[2rem] border border-slate-950/[0.08] bg-white/76 p-8 text-center shadow-2xl shadow-blue-950/[0.08] backdrop-blur-2xl md:p-12">
-      <p class="text-sm font-bold text-blue-700">Demo conceptual</p>
-      <h2 class="mx-auto mt-3 max-w-3xl font-display text-3xl font-bold tracking-[-0.04em] text-slate-950 md:text-4xl">
-        ¿Quiere una página clara para su clínica o servicio profesional?
+    <div class="mx-auto max-w-5xl rounded-[2.25rem] border border-slate-950/[0.08] bg-white p-8 text-center shadow-2xl shadow-blue-950/[0.08] md:p-12">
+      <p class="text-xs font-extrabold uppercase tracking-[0.22em] text-[#2563eb]">Demo conceptual — no corresponde a un cliente real</p>
+      <h2 class="mx-auto mt-4 max-w-3xl text-3xl font-extrabold leading-tight tracking-[-0.045em] text-[#0f172a] md:text-5xl">
+        ¿Quiere una página similar para su negocio?
       </h2>
-      <p class="mx-auto mt-4 max-w-2xl text-base leading-7 text-slate-600">
-        Podemos revisar su caso y recomendarle una estructura ajustada a su
-        negocio, su contenido y sus objetivos.
+      <p class="mx-auto mt-5 max-w-2xl text-base font-medium leading-[1.75] text-[#475569]">
+        Esta es una demo conceptual creada por FENRIR Soluciones Digitales para mostrar cómo podría verse una página adaptada a una clínica, servicio profesional o negocio local.
       </p>
       <div class="mt-8">
         <a
           href={whatsappUrl}
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex min-h-12 items-center justify-center rounded-full bg-blue-600 px-7 py-3 text-sm font-bold text-white shadow-xl shadow-blue-600/20 transition hover:-translate-y-0.5 hover:bg-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
+          class="inline-flex min-h-12 items-center justify-center rounded-full bg-[#2563eb] px-7 py-3 text-sm font-extrabold text-white shadow-xl shadow-blue-600/20 transition hover:-translate-y-0.5 hover:bg-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb] focus-visible:ring-offset-2"
         >
-          Solicitar recomendación
+          Solicitar una recomendación
         </a>
       </div>
     </div>
