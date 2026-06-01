@@ -129,16 +129,16 @@ const darkCard = variant === "restaurant";
     </div>
   </div>
 
-  <p class:list={["mt-6 inline-flex w-max rounded-full px-3 py-1 text-xs font-semibold ring-1", theme.badge]}>
+  <p class:list={["mt-6 inline-flex w-max rounded-full px-3 py-1 text-xs font-bold uppercase tracking-[0.16em] ring-1", theme.badge]}>
     {category}
   </p>
-  <h3 class:list={["mt-3 font-display text-2xl font-semibold", darkCard ? "text-white" : "text-slate-950"]}>
+  <h3 class:list={["mt-3 demo-title font-display text-2xl font-bold leading-tight tracking-[-0.05em]", darkCard ? "text-white" : "text-slate-950"]}>
     {title}
   </h3>
-  <p class:list={["mt-3 flex-1 text-sm leading-6", darkCard ? "text-stone-300" : "text-slate-600"]}>
+  <p class:list={["mt-3 flex-1 text-sm font-medium leading-[1.7]", darkCard ? "text-stone-300" : "text-slate-600"]}>
     {description}
   </p>
-  <ul class:list={["mt-6 grid gap-2 text-sm", darkCard ? "text-stone-200" : "text-slate-700"]}>
+  <ul class:list={["mt-6 grid gap-2 text-sm font-medium leading-6", darkCard ? "text-stone-200" : "text-slate-700"]}>
     {
       highlights.map((item) => (
         <li class="flex items-center gap-2">

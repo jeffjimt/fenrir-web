@@ -15,20 +15,20 @@ const whatsappUrl = getWhatsappUrl(siteConfig.whatsappMessages.footer ?? siteCon
           height="42"
           class="h-10 w-auto"
         />
-        <p class="mt-5 text-sm leading-6 text-slate-300">
+        <p class="mt-5 text-sm font-medium leading-[1.7] text-slate-300">
           Páginas web profesionales para negocios en Costa Rica, pensadas para
           mostrar información clara y generar contactos por WhatsApp.
         </p>
       </div>
 
       <div>
-        <h2 class="text-sm font-semibold text-white">Secciones</h2>
+        <h2 class="font-display text-sm font-bold uppercase tracking-[0.18em] text-white">Secciones</h2>
         <nav class="mt-4 grid gap-3" aria-label="Enlaces del footer">
           {
             siteConfig.navItems.map((item) => (
               <a
                 href={item.href}
-                class="text-sm text-slate-300 transition hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
+                class="text-sm font-medium text-slate-300 transition hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
               >
                 {item.label}
               </a>
@@ -38,8 +38,8 @@ const whatsappUrl = getWhatsappUrl(siteConfig.whatsappMessages.footer ?? siteCon
       </div>
 
       <div>
-        <h2 class="text-sm font-semibold text-white">Contacto</h2>
-        <div class="mt-4 grid gap-3 text-sm text-slate-300">
+        <h2 class="font-display text-sm font-bold uppercase tracking-[0.18em] text-white">Contacto</h2>
+        <div class="mt-4 grid gap-3 text-sm font-medium text-slate-300">
           <p>{siteConfig.location}</p>
           <a
             href={`mailto:${siteConfig.email}`}

@@ -57,15 +57,15 @@ const finalWhatsappUrl = getWhatsappUrl(siteConfig.whatsappMessages.final);
       >
       </div>
 
-      <div class="relative z-10 mx-auto flex min-h-screen max-w-[1200px] flex-col items-center justify-center px-5 pb-16 pt-14 text-center sm:px-6 lg:px-8">
-        <p class="hero-preheadline animate-fade-up mb-5 inline-flex rounded-full border border-white/15 bg-white/5 px-4 py-2 text-xs font-semibold uppercase leading-none tracking-[0.22em] text-white/75 backdrop-blur-sm md:text-base">
+      <div class="relative z-10 mx-auto flex min-h-screen w-full max-w-[1200px] min-w-0 flex-col items-center justify-center px-5 pb-16 pt-14 text-center sm:px-6 lg:px-8">
+        <p class="hero-preheadline animate-fade-up mb-5 inline-flex max-w-full justify-center rounded-full border border-white/15 bg-white/5 px-3 py-2 text-[0.64rem] font-bold uppercase leading-none tracking-[0.18em] text-white/75 backdrop-blur-sm sm:px-4 sm:text-xs sm:tracking-[0.26em] md:text-sm">
           Presencia digital para negocios
         </p>
-        <h1 class="animate-hero-title mx-auto flex max-w-[1200px] flex-col overflow-visible bg-gradient-to-b from-white via-white to-[#b4c0ff] bg-clip-text py-3 font-display text-[clamp(3.1rem,14vw,5rem)] font-semibold leading-[1.02] text-transparent sm:text-[clamp(4rem,10vw,7rem)] sm:leading-[0.96] lg:text-[clamp(5.6rem,8.4vw,8.25rem)]">
+        <h1 class="animate-hero-title mx-auto flex w-full max-w-[1200px] min-w-0 flex-col overflow-visible bg-gradient-to-b from-white via-white to-[#b4c0ff] bg-clip-text py-3 font-display text-[clamp(2.55rem,10.9vw,4.8rem)] font-semibold leading-[1.02] tracking-[-0.035em] text-transparent sm:text-[clamp(4rem,10vw,7rem)] sm:leading-[0.96] sm:tracking-[-0.055em] lg:text-[clamp(5.6rem,8.4vw,8.25rem)]">
           <span class="block">Páginas que</span>
           <span class="block lg:whitespace-nowrap">impulsan negocios</span>
         </h1>
-        <p class="animate-fade-up-delay mx-auto mt-4 max-w-2xl text-base leading-[1.65] text-white/72 sm:text-xl">
+        <p class="animate-fade-up-delay mx-auto mt-4 w-full max-w-[20.75rem] text-base font-medium leading-[1.7] text-white/72 sm:max-w-2xl sm:text-xl">
           Creamos sitios web modernos, rápidos y optimizados para que sus
           clientes encuentren sus servicios, ubicación y le escriban directo por
           WhatsApp.
@@ -76,7 +76,7 @@ const finalWhatsappUrl = getWhatsappUrl(siteConfig.whatsappMessages.final);
             href={heroWhatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            class="group inline-flex min-h-14 w-full items-center justify-center gap-4 rounded-full bg-white px-7 py-4 text-base font-semibold text-[#0a0400] shadow-2xl shadow-white/10 transition hover:scale-[1.03] hover:shadow-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-4 focus-visible:ring-offset-black sm:w-auto"
+            class="group inline-flex min-h-14 w-full items-center justify-center gap-4 rounded-full bg-white px-7 py-4 text-base font-bold tracking-[0.01em] text-[#0a0400] shadow-2xl shadow-white/10 transition hover:scale-[1.03] hover:shadow-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-4 focus-visible:ring-offset-black sm:w-auto"
             aria-label="Solicitar demo por WhatsApp"
           >
             <span>Solicitar demo</span>
@@ -100,7 +100,7 @@ const finalWhatsappUrl = getWhatsappUrl(siteConfig.whatsappMessages.final);
           </a>
           <a
             href="#ejemplos"
-            class="group inline-flex min-h-12 w-full items-center justify-center gap-3 rounded-lg px-5 py-3 text-base font-semibold text-white/70 transition hover:bg-white/5 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-4 focus-visible:ring-offset-black sm:w-auto"
+            class="group inline-flex min-h-12 w-full items-center justify-center gap-3 rounded-lg px-5 py-3 text-base font-bold tracking-[0.01em] text-white/70 transition hover:bg-white/5 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-4 focus-visible:ring-offset-black sm:w-auto"
           >
             <span>Ver ejemplos</span>
             <span class="transition group-hover:translate-x-1" aria-hidden="true">→</span>
@@ -143,7 +143,7 @@ const finalWhatsappUrl = getWhatsappUrl(siteConfig.whatsappMessages.final);
           />
         </div>
         <div class="border-l-4 border-blue-600 bg-slate-50 p-6 md:p-8">
-          <p class="text-lg leading-8 text-slate-700">
+          <p class="text-lg font-medium leading-8 text-slate-700">
             Cuando la información está dispersa, se pierden consultas y baja la
             percepción profesional. Una página clara funciona como punto central
             para presentar el negocio y facilitar el primer contacto.
@@ -162,28 +162,28 @@ const finalWhatsappUrl = getWhatsappUrl(siteConfig.whatsappMessages.final);
             height="112"
             class="h-auto w-44"
           />
-          <h2 class="mt-8 font-display text-3xl font-semibold md:text-4xl">
+          <h2 class="mt-8 font-display text-3xl font-bold leading-tight tracking-[-0.04em] md:text-4xl">
             Una presencia digital clara vende confianza antes de la llamada
           </h2>
         </div>
         <div class="grid gap-5 md:grid-cols-2">
           <div class="border border-white/10 bg-white/5 p-6">
-            <h3 class="text-xl font-semibold">Información ordenada</h3>
-            <p class="mt-3 text-sm leading-6 text-slate-300">
+            <h3 class="font-display text-xl font-bold leading-tight tracking-[-0.03em]">Información ordenada</h3>
+            <p class="mt-3 text-sm font-medium leading-[1.7] text-slate-300">
               Servicios, horarios, ubicación y contacto se presentan en
               una ruta simple para el visitante.
             </p>
           </div>
           <div class="border border-white/10 bg-white/5 p-6">
-            <h3 class="text-xl font-semibold">Contacto inmediato</h3>
-            <p class="mt-3 text-sm leading-6 text-slate-300">
+            <h3 class="font-display text-xl font-bold leading-tight tracking-[-0.03em]">Contacto inmediato</h3>
+            <p class="mt-3 text-sm font-medium leading-[1.7] text-slate-300">
               Cada sección puede guiar hacia WhatsApp para convertir interés en
               una consulta real.
             </p>
           </div>
           <div class="border border-white/10 bg-white/5 p-6 md:col-span-2">
-            <h3 class="text-xl font-semibold">Página rápida y confiable</h3>
-            <p class="mt-3 text-sm leading-6 text-slate-300">
+            <h3 class="font-display text-xl font-bold leading-tight tracking-[-0.03em]">Página rápida y confiable</h3>
+            <p class="mt-3 text-sm font-medium leading-[1.7] text-slate-300">
               Construimos una presencia web ligera, segura y pensada para que el
               cliente no espere ni se pierda antes de contactar.
             </p>
@@ -204,7 +204,7 @@ const finalWhatsappUrl = getWhatsappUrl(siteConfig.whatsappMessages.final);
             includes.map((item) => (
               <div class="flex items-center gap-3 rounded-lg border border-slate-200 bg-slate-50 p-4">
                 <span class="h-2.5 w-2.5 rounded-full bg-blue-600" aria-hidden="true" />
-                <p class="text-sm font-semibold text-slate-800">{item}</p>
+                <p class="text-sm font-bold tracking-[0.01em] text-slate-800">{item}</p>
               </div>
             ))
           }
@@ -260,7 +260,7 @@ const finalWhatsappUrl = getWhatsappUrl(siteConfig.whatsappMessages.final);
               >
                 <span
                   class:list={[
-                    "flex h-10 w-10 items-center justify-center rounded-md text-sm font-semibold",
+                    "flex h-10 w-10 items-center justify-center rounded-md text-sm font-bold",
                     index === 1
                       ? "bg-blue-600 text-white"
                       : "bg-white text-slate-950 ring-1 ring-slate-200",
@@ -268,10 +268,10 @@ const finalWhatsappUrl = getWhatsappUrl(siteConfig.whatsappMessages.final);
                 >
                   {String(index + 1).padStart(2, "0")}
                 </span>
-                <h3 class="mt-5 font-display text-2xl font-semibold text-slate-950">
+                <h3 class="mt-5 font-display text-2xl font-bold leading-tight tracking-[-0.04em] text-slate-950">
                   {item.title}
                 </h3>
-                <p class="mt-3 text-sm leading-6 text-slate-600">{item.description}</p>
+                <p class="mt-3 text-sm font-medium leading-[1.7] text-slate-600">{item.description}</p>
               </article>
             ))
           }
@@ -322,7 +322,7 @@ const finalWhatsappUrl = getWhatsappUrl(siteConfig.whatsappMessages.final);
           class="mx-auto h-14 w-14"
           aria-hidden="true"
         />
-        <h2 class="mt-7 font-display text-3xl font-semibold md:text-4xl">
+        <h2 class="mt-7 font-display text-3xl font-bold leading-tight tracking-[-0.04em] md:text-4xl">
           ¿Quiere ver cómo podría verse la página de su negocio?
         </h2>
         <p class="mx-auto mt-4 max-w-2xl text-base leading-7 text-slate-300">
